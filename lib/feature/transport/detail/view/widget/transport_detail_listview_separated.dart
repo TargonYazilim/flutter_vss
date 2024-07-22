@@ -4,8 +4,10 @@ class TransportDetailListViewSeparated extends StatelessWidget {
   const TransportDetailListViewSeparated({
     super.key,
     required this.sevkiyatModel,
+    required this.onPressed,
   });
   final SevkiyatModel sevkiyatModel;
+  final void Function(int index) onPressed;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -29,7 +31,7 @@ class TransportDetailListViewSeparated extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () => onPressed.call(index),
                     icon: Icon(Icons.qr_code_scanner_rounded))),
           );
         },
