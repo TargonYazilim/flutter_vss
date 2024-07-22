@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vss/product/init/application_initialize.dart';
 import 'package:flutter_vss/product/init/state_initialize.dart';
+import 'package:flutter_vss/product/init/theme/custom_dark_theme.dart';
+import 'package:flutter_vss/product/init/theme/custom_light_theme.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/state/view_model/product_view_model.dart';
-import 'package:flutter_vss/product/theme/custom_dark_theme.dart';
-import 'package:flutter_vss/product/theme/custom_light_theme.dart';
 
 Future<void> main() async {
   await ApplicationInitialize().make();
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     final _appRouter = AppRouter();
 
     return MaterialApp.router(
+      
       routerConfig: _appRouter.config(),
       debugShowCheckedModeBanner: false,
       theme: CustomLightTheme().themeData,

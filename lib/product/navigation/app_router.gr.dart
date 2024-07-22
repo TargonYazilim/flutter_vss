@@ -27,6 +27,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginView(),
       );
     },
+    TransportDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TransportDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TransportDetailView(
+          key: args.key,
+          sevkiyatModel: args.sevkiyatModel,
+        ),
+      );
+    },
+    TransportRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TransportView(),
+      );
+    },
   };
 }
 
@@ -54,6 +70,58 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TransportDetailView]
+class TransportDetailRoute extends PageRouteInfo<TransportDetailRouteArgs> {
+  TransportDetailRoute({
+    Key? key,
+    required SevkiyatModel sevkiyatModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TransportDetailRoute.name,
+          args: TransportDetailRouteArgs(
+            key: key,
+            sevkiyatModel: sevkiyatModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TransportDetailRoute';
+
+  static const PageInfo<TransportDetailRouteArgs> page =
+      PageInfo<TransportDetailRouteArgs>(name);
+}
+
+class TransportDetailRouteArgs {
+  const TransportDetailRouteArgs({
+    this.key,
+    required this.sevkiyatModel,
+  });
+
+  final Key? key;
+
+  final SevkiyatModel sevkiyatModel;
+
+  @override
+  String toString() {
+    return 'TransportDetailRouteArgs{key: $key, sevkiyatModel: $sevkiyatModel}';
+  }
+}
+
+/// generated route for
+/// [TransportView]
+class TransportRoute extends PageRouteInfo<void> {
+  const TransportRoute({List<PageRouteInfo>? children})
+      : super(
+          TransportRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TransportRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
