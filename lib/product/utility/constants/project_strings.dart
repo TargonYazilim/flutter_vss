@@ -10,4 +10,5 @@ final class ProjectStrings {
   static const String vss = 'VSS';
   static const String vibe = 'Vibe';
   static const String transportSystem = 'sevkiyat sistemi';
+  static const String cancel = 'İptal';
 }
