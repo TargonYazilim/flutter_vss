@@ -6,30 +6,13 @@ class TransportListViewSeparated extends StatelessWidget {
     required this.list,
     required this.onPressed,
   });
-  final List<SevkiyatModel> list;
-  final void Function(SevkiyatModel sevkiyatModel) onPressed;
+  final List<TransportModel> list;
+  final void Function(TransportModel transportModel) onPressed;
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        itemCount: list.length,
-        itemBuilder: (BuildContext context, int index) {
-          final sevkiyat = list[index];
-          return ListTile(
-            onTap: () => onPressed.call(sevkiyat),
-            leading: ClipOval(
-              child: Container(
-                height: 40,
-                width: 40,
-                color: context.general.appTheme.colorScheme.secondary,
-                child: Center(
-                    child: Text(sevkiyat.company!.substring(0, 1),
-                        style: context.general.appTheme.textTheme.titleMedium)),
-              ),
-            ),
-            title: Text(
-                '${sevkiyat.company} - ${sevkiyat.code} - ${sevkiyat.address}'),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => Divider());
+    return ProductListviewSeparated<TransportModel>(
+      items: list,
+      onPressed: (transport) => onPressed.call(transport),
+    );
   }
 }

@@ -1,0 +1,2 @@
+1. İrsaliye bilgileri veya ürün okutma bilgileri local'de tutulacak. Senkronize edildiğinde sunucuya gönderilecek.
+2. 
