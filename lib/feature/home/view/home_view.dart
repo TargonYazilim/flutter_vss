@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
+import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/constants/project_images.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
@@ -42,7 +43,13 @@ class HomeView extends StatelessWidget {
             Expanded(
                 child: HomeCardButton(
               text: ProjectStrings.shipment,
-              onTab: () {},
+              onTab: () {
+                ProductStateItems.toastService
+                    .showErrorMessage(message: 'Oldu');
+                ProductStateItems.toastService
+                    .showSuccessMessage(message: 'Oldu');
+                ProductStateItems.toastService.showInfoMessage(message: 'Oldu');
+              },
               child: ProjectImages.imgShipment.toWidget(),
             )),
           ],

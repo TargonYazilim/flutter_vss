@@ -34,6 +34,9 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_barcode_scanner: ^2.0.0
 
+  # UI
+  fluttertoast: ^8.2.6
+
   # Navigation
   auto_route: ^8.3.0
 
