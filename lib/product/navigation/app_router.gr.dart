@@ -33,7 +33,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: TransportDetailView(
           key: args.key,
-          sevkiyatModel: args.sevkiyatModel,
+          transportModel: args.transportModel,
         ),
       );
     },
@@ -79,13 +79,13 @@ class LoginRoute extends PageRouteInfo<void> {
 class TransportDetailRoute extends PageRouteInfo<TransportDetailRouteArgs> {
   TransportDetailRoute({
     Key? key,
-    required SevkiyatModel sevkiyatModel,
+    required TransportModel transportModel,
     List<PageRouteInfo>? children,
   }) : super(
           TransportDetailRoute.name,
           args: TransportDetailRouteArgs(
             key: key,
-            sevkiyatModel: sevkiyatModel,
+            transportModel: transportModel,
           ),
           initialChildren: children,
         );
@@ -99,16 +99,16 @@ class TransportDetailRoute extends PageRouteInfo<TransportDetailRouteArgs> {
 class TransportDetailRouteArgs {
   const TransportDetailRouteArgs({
     this.key,
-    required this.sevkiyatModel,
+    required this.transportModel,
   });
 
   final Key? key;
 
-  final SevkiyatModel sevkiyatModel;
+  final TransportModel transportModel;
 
   @override
   String toString() {
-    return 'TransportDetailRouteArgs{key: $key, sevkiyatModel: $sevkiyatModel}';
+    return 'TransportDetailRouteArgs{key: $key, transportModel: $transportModel}';
   }
 }
 
