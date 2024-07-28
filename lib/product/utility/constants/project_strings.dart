@@ -11,4 +11,9 @@ final class ProjectStrings {
   static const String vibe = 'Vibe';
   static const String transportSystem = 'sevkiyat sistemi';
   static const String cancel = 'İptal';
+  static const String username = 'Kullanıcı Adı';
+  static const String password = 'Şifre';
+  static const String usernameEmptyError = 'Kullanıcı adı boş olamaz';
+  static const String passwordEmptyError = 'Şifre boş olamaz';
+  static const String login = 'Giriş yap';
 }
