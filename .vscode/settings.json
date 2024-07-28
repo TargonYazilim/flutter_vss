@@ -46,8 +46,10 @@
     "kartal",
     "Lastname",
     "Listview",
+    "macaddress",
     "metot",
     "roboto",
-    "Soyadınız"
+    "Soyadınız",
+    "Usernamepasswordtextfield"
   ]
 }

@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
     final _appRouter = AppRouter();
 
     return MaterialApp.router(
-      
       routerConfig: _appRouter.config(),
       debugShowCheckedModeBanner: false,
       theme: CustomLightTheme().themeData,
