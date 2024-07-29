@@ -40,6 +40,7 @@ final class ApplicationInitialize {
     _productEnvironmentWithContainer();
 
     await ProductStateItems.productCache.init();
+    await ProductStateItems.productSharedCache.init();
   }
 
   static void _productEnvironmentWithContainer() {
