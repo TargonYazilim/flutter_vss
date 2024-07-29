@@ -43,9 +43,7 @@ class _LoginViewState extends LoginBaseState<LoginView> with LoginViewMixin {
                 height: WidgetSizes.spacingXl,
               ),
               CustomLoginButton(
-                onOperation: () async {
-                  await viewModel.login();
-                },
+                onOperation: () async => pushToPage(await viewModel.login()),
               ),
               const Spacer(),
             ],

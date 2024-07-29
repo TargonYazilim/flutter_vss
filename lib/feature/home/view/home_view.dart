@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vss/feature/home/view_model/home_view_model.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
-import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/constants/project_images.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
@@ -12,9 +12,14 @@ part 'widget/home_appbar.dart';
 part 'widget/home_card_button.dart';
 
 @RoutePage()
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +48,15 @@ class HomeView extends StatelessWidget {
             Expanded(
                 child: HomeCardButton(
               text: ProjectStrings.shipment,
-              onTab: () {
-                ProductStateItems.toastService
-                    .showErrorMessage(message: 'Oldu');
-                ProductStateItems.toastService
-                    .showSuccessMessage(message: 'Oldu');
-                ProductStateItems.toastService.showInfoMessage(message: 'Oldu');
-              },
+              onTab: () {},
               child: ProjectImages.imgShipment.toWidget(),
             )),
           ],
         ),
+        SizedBox(height: WidgetSizes.spacingXxl9),
+        TextButton(
+            onPressed: () async => logOut(),
+            child: Text(ProjectStrings.logOut)),
         const Spacer(),
         Text('Vibe'),
       ],

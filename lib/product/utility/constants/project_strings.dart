@@ -16,4 +16,5 @@ final class ProjectStrings {
   static const String usernameEmptyError = 'Kullanıcı adı boş olamaz';
   static const String passwordEmptyError = 'Şifre boş olamaz';
   static const String login = 'Giriş yap';
+  static const String logOut = 'Çıkış yap';
 }
