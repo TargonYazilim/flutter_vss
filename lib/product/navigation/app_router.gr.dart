@@ -27,26 +27,26 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginView(),
       );
     },
+    OrderDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<OrderDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: OrderDetailView(
+          key: args.key,
+          orders: args.orders,
+        ),
+      );
+    },
+    OrderRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OrderView(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashView(),
-      );
-    },
-    TransportDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<TransportDetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TransportDetailView(
-          key: args.key,
-          transportModel: args.transportModel,
-        ),
-      );
-    },
-    TransportRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TransportView(),
       );
     },
   };
@@ -81,6 +81,58 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OrderDetailView]
+class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
+  OrderDetailRoute({
+    Key? key,
+    required List<Order> orders,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OrderDetailRoute.name,
+          args: OrderDetailRouteArgs(
+            key: key,
+            orders: orders,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderDetailRoute';
+
+  static const PageInfo<OrderDetailRouteArgs> page =
+      PageInfo<OrderDetailRouteArgs>(name);
+}
+
+class OrderDetailRouteArgs {
+  const OrderDetailRouteArgs({
+    this.key,
+    required this.orders,
+  });
+
+  final Key? key;
+
+  final List<Order> orders;
+
+  @override
+  String toString() {
+    return 'OrderDetailRouteArgs{key: $key, orders: $orders}';
+  }
+}
+
+/// generated route for
+/// [OrderView]
+class OrderRoute extends PageRouteInfo<void> {
+  const OrderRoute({List<PageRouteInfo>? children})
+      : super(
+          OrderRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashView]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -90,58 +142,6 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [TransportDetailView]
-class TransportDetailRoute extends PageRouteInfo<TransportDetailRouteArgs> {
-  TransportDetailRoute({
-    Key? key,
-    required TransportModel transportModel,
-    List<PageRouteInfo>? children,
-  }) : super(
-          TransportDetailRoute.name,
-          args: TransportDetailRouteArgs(
-            key: key,
-            transportModel: transportModel,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'TransportDetailRoute';
-
-  static const PageInfo<TransportDetailRouteArgs> page =
-      PageInfo<TransportDetailRouteArgs>(name);
-}
-
-class TransportDetailRouteArgs {
-  const TransportDetailRouteArgs({
-    this.key,
-    required this.transportModel,
-  });
-
-  final Key? key;
-
-  final TransportModel transportModel;
-
-  @override
-  String toString() {
-    return 'TransportDetailRouteArgs{key: $key, transportModel: $transportModel}';
-  }
-}
-
-/// generated route for
-/// [TransportView]
-class TransportRoute extends PageRouteInfo<void> {
-  const TransportRoute({List<PageRouteInfo>? children})
-      : super(
-          TransportRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'TransportRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

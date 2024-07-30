@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 final class ProjectStrings {
   const ProjectStrings._();
 
-  static const String transport = 'Sevkiyat';
-  static const String transports = 'Sevkiyatlar';
+  static const String order = 'Sevkiyat';
+  static const String orders = 'Sevkiyatlar';
   static const String shipment = 'Yükleme';
   static const String vss = 'VSS';
   static const String vibe = 'Vibe';
-  static const String transportSystem = 'sevkiyat sistemi';
+  static const String orderSystem = 'sevkiyat sistemi';
   static const String cancel = 'İptal';
   static const String username = 'Kullanıcı Adı';
   static const String password = 'Şifre';

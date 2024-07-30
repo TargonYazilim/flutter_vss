@@ -3,13 +3,17 @@ import 'dart:io';
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/product/init/config/app_environment.dart';
+import 'package:flutter_vss/product/service/manager/product_network_interceptor.dart';
 
 final class ProductNetworkManager extends DioNexusManager {
   ProductNetworkManager.base()
       : super(
+          interceptor: ProductNetworkInterceptor(),
           options: BaseOptions(
             baseUrl: AppEnvironmentItems.baseUrl.value,
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+              HttpHeaders.contentTypeHeader: 'application/json',
+            },
           ),
         );
 

@@ -2,8 +2,8 @@
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_vss/product/utility/barcode/custom_barcode_scanner.dart';
 
-class TransportDetailViewModel {
-  TransportDetailViewModel({
+class OrderDetailViewModel {
+  OrderDetailViewModel({
     required CustomBarcodeScanner barcodeScanner,
   }) : _barcodeScanner = barcodeScanner;
   late CustomBarcodeScanner _barcodeScanner;

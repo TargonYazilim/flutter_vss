@@ -8,7 +8,7 @@ part of 'login_response.dart';
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       error: json['error'] as String?,
       result: json['result'] as String?,
       token: json['token'] as String?,

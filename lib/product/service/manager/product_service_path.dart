@@ -1,6 +1,7 @@
 ///Project service path
 enum ProductServicePath {
-  login('$_user/Login');
+  login('$_user/Login'),
+  getOrder('$_order/GetOrder');
 
   final String value;
   const ProductServicePath(this.value);
@@ -14,4 +15,5 @@ enum ProductServicePath {
 
   /// Api UserProfile name
   static const String _user = 'Users/';
+  static const String _order = 'Order/';
 }

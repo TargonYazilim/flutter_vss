@@ -40,9 +40,9 @@ class _HomeViewState extends HomeViewModel {
           children: [
             Expanded(
               child: HomeCardButton(
-                text: ProjectStrings.transport,
-                onTab: () => context.router.push(TransportRoute()),
-                child: ProjectImages.imgTransport.toWidget(),
+                text: ProjectStrings.order,
+                onTab: () => context.router.push(OrderRoute()),
+                child: ProjectImages.imgOrder.toWidget(),
               ),
             ),
             Expanded(

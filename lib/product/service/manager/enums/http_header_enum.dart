@@ -1,0 +1,4 @@
+enum HttpHeaderEnum {
+  Bearer,
+  Authorization;
+}

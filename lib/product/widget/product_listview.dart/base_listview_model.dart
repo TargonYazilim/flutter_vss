@@ -1,3 +1,3 @@
-abstract class BaseListviewModel<T> {
+mixin BaseListviewModel<T> {
   String get title;
 }

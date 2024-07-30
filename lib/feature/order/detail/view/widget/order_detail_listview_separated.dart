@@ -1,17 +1,16 @@
-part of '../transport_detail_view.dart';
+part of '../order_detail_view.dart';
 
-class TransportDetailListViewSeparated extends StatelessWidget {
-  const TransportDetailListViewSeparated({
-    super.key,
-    required this.transportModel,
-    required this.onPressed,
-  });
-  final TransportModel transportModel;
+class OrderDetailListviewSeparated extends StatelessWidget {
+  const OrderDetailListviewSeparated(
+      {super.key, required this.orders, required this.onPressed});
+ 
+  final List<Order> orders;
   final void Function(int index) onPressed;
+
   @override
   Widget build(BuildContext context) {
     return ProductListviewSeparated(
-      items: transportModel.details,
+      items: orders,
       trallingOnPressed: (item, index) => onPressed.call(index),
       tralling: Card(
         shape: RoundedRectangleBorder(
