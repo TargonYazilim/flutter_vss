@@ -1,7 +1,7 @@
-part of '../transport_detail_view.dart';
+part of '../order_detail_view.dart';
 
-class TransportDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const TransportDetailAppbar({super.key, required this.title});
+class OrderDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const OrderDetailAppbar({super.key, required this.title});
   final String title;
   @override
   Widget build(BuildContext context) {

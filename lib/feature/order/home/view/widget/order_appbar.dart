@@ -1,14 +1,14 @@
-part of '../transport_view.dart';
+part of '../order_view.dart';
 
-class TransportAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const TransportAppbar({super.key});
+class OrderAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const OrderAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 1,
       shadowColor: context.general.appTheme.colorScheme.shadow,
-      title: Text(ProjectStrings.transports,
+      title: Text(ProjectStrings.orders,
           style: context.general.appTheme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: context.general.appTheme.colorScheme.onSurface)),

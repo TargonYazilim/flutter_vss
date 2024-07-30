@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 enum ProjectImages {
   imgShipment('img_shipment'),
-  imgTransport('img_transport'),
+  imgOrder('img_order'),
   imgSafa('img_safa');
 
   final String value;

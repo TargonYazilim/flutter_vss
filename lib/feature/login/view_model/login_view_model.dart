@@ -38,6 +38,7 @@ final class LoginViewModel extends Cubit<LoginState> {
       emit(state.copyWith(isLoading: true));
 
       var deviceUniqueId = await DeviceUtility.instance.getUniqueDeviceId();
+      print(deviceUniqueId);
       var result = await _authenticationOperation.login(
         Login(
           username: usernameController.text,
