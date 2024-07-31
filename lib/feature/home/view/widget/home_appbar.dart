@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 part of '../home_view.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,7 +22,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               color: context.general.appTheme.colorScheme.onSurface)),
       actions: [
         Padding(
-          padding: ProjectPadding.allSmall(),
+          padding: const ProjectPadding.allSmall(),
           child: Text(
             'Safa Uludoğan',
             style: context.general.appTheme.textTheme.titleMedium?.copyWith(

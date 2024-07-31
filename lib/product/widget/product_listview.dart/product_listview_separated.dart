@@ -1,17 +1,21 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
+import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/base_listview_model.dart';
 import 'package:kartal/kartal.dart';
 
 part 'decoration/leading_decoration.dart';
 
-class ProductListviewSeparated<T extends BaseListviewModel>
+class ProductListviewSeparated<T extends BaseListviewModel<T>>
     extends StatelessWidget {
-  const ProductListviewSeparated(
-      {required this.items,
-      this.onPressed,
-      super.key,
-      this.tralling,
-      this.trallingOnPressed});
+  const ProductListviewSeparated({
+    required this.items,
+    this.onPressed,
+    super.key,
+    this.tralling,
+    this.trallingOnPressed,
+  });
 
   final List<T> items;
   final void Function(T item)? onPressed;
@@ -19,24 +23,33 @@ class ProductListviewSeparated<T extends BaseListviewModel>
   final Widget? tralling;
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return Padding(
+      padding: const ProjectPadding.topSmall(),
+      child: ListView.separated(
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             onTap: () => onPressed?.call(items[index]),
             leading: LeadingDecoration(
-                child: Text(items[index].title.toString().substring(0, 1),
-                    style: context.general.appTheme.textTheme.titleMedium)),
-            title: Text(items[index].title,
-                style: context.general.appTheme.textTheme.titleMedium),
+              child: Text(
+                items[index].title.substring(0, 1),
+                style: context.general.appTheme.textTheme.titleMedium,
+              ),
+            ),
+            title: Text(
+              items[index].title,
+              style: context.general.appTheme.textTheme.titleMedium,
+            ),
             trailing: tralling != null
                 ? InkWell(
                     onTap: () => trallingOnPressed?.call(items[index], index),
                     child: tralling,
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           );
         },
-        separatorBuilder: (BuildContext context, int index) => Divider());
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
+      ),
+    );
   }
 }

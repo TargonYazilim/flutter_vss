@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 part of '../order_view.dart';
 
 class OrderListViewSeparated extends StatelessWidget {
@@ -6,14 +8,14 @@ class OrderListViewSeparated extends StatelessWidget {
     required this.orders,
     required this.onPressed,
   });
+
   final List<Order> orders;
   final void Function(Order orders) onPressed;
   @override
   Widget build(BuildContext context) {
-    print(orders.length);
     return ProductListviewSeparated<Order>(
       items: orders,
-      onPressed: (orders) => onPressed.call(orders),
+      onPressed: onPressed.call,
     );
   }
 }

@@ -26,9 +26,9 @@ class _LoginViewState extends LoginBaseState<LoginView> with LoginViewMixin {
   Widget build(BuildContext context) {
     return CustomKeyboardDismisser(
       child: Scaffold(
-        floatingActionButton: Icon(Icons.add),
+        floatingActionButton: const Icon(Icons.add),
         body: Padding(
-          padding: ProjectPadding.horizontalMedium(),
+          padding: const ProjectPadding.horizontalMedium(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,11 +39,12 @@ class _LoginViewState extends LoginBaseState<LoginView> with LoginViewMixin {
                     usernameController: viewModel.usernameController,
                     passwordController: viewModel.passwordController,
                   )),
-              SizedBox(
+              const SizedBox(
                 height: WidgetSizes.spacingXl,
               ),
               CustomLoginButton(
-                onOperation: () async => pushToPage(await viewModel.login()),
+                onOperation: () async =>
+                    pushToPage(result: await viewModel.login()),
               ),
               const Spacer(),
             ],

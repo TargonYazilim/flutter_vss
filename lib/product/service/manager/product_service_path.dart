@@ -1,7 +1,8 @@
 ///Project service path
 enum ProductServicePath {
   login('$_user/Login'),
-  getOrder('$_order/GetOrder');
+  getOrder('$_order/GetOrder'),
+  getOrderDetail('$_order/GetOrderDetail');
 
   final String value;
   const ProductServicePath(this.value);

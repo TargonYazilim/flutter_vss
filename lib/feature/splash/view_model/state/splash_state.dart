@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
+@immutable
 final class SplashState extends Equatable {
+  const SplashState({required this.isLoading});
   final bool isLoading;
-
-  SplashState({required this.isLoading});
 
   @override
   List<Object?> get props => [isLoading];

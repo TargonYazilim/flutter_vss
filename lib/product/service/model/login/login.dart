@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -39,3 +41,4 @@ class Login extends IDioNexusNetworkModel<Login> with EquatableMixin {
     );
   }
 }
+

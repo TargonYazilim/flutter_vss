@@ -23,10 +23,10 @@ class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppbar(),
+      appBar: const HomeAppbar(),
       backgroundColor: context.general.appTheme.colorScheme.surface,
       body: Padding(
-        padding: ProjectPadding.horizontalMedium(),
+        padding: const ProjectPadding.horizontalMedium(),
         child: _body(context),
       ),
     );
@@ -35,13 +35,13 @@ class _HomeViewState extends HomeViewModel {
   Widget _body(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: WidgetSizes.spacingXxl9),
+        const SizedBox(height: WidgetSizes.spacingXxl9),
         Row(
           children: [
             Expanded(
               child: HomeCardButton(
                 text: ProjectStrings.order,
-                onTab: () => context.router.push(OrderRoute()),
+                onTab: () => context.router.push(const OrderRoute()),
                 child: ProjectImages.imgOrder.toWidget(),
               ),
             ),
@@ -53,12 +53,12 @@ class _HomeViewState extends HomeViewModel {
             )),
           ],
         ),
-        SizedBox(height: WidgetSizes.spacingXxl9),
+        const SizedBox(height: WidgetSizes.spacingXxl9),
         TextButton(
             onPressed: () async => logOut(),
-            child: Text(ProjectStrings.logOut)),
+            child: const Text(ProjectStrings.logOut)),
         const Spacer(),
-        Text('Vibe'),
+        const Text('Vibe'),
       ],
     );
   }

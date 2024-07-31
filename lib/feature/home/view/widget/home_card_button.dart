@@ -27,7 +27,7 @@ class HomeCardButton extends StatelessWidget {
                   children: [
                     SizedBox(
                         height: context.sized.dynamicHeight(.1), child: child),
-                    SizedBox(height: WidgetSizes.spacingS),
+                    const SizedBox(height: WidgetSizes.spacingS),
                     Text(
                       text,
                       style: context.general.appTheme.textTheme.bodyLarge

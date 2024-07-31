@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
+@immutable
 final class LoginState extends Equatable {
+  const LoginState({required this.isLoading});
   final bool isLoading;
-
-  LoginState({required this.isLoading});
 
   @override
   List<Object?> get props => [isLoading];
