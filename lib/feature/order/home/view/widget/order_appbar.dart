@@ -17,7 +17,26 @@ class OrderAppbar extends StatelessWidget implements PreferredSizeWidget {
           color: context.general.appTheme.colorScheme.onSurface,
         ),
       ),
+      actions: [LoadingBlocBuilder()],
       centerTitle: true,
+    );
+  }
+
+  Widget LoadingBlocBuilder() {
+    return BlocBuilder<OrderViewModel, OrderState>(
+      builder: (BuildContext context, state) {
+        if (!state.isLoading) {
+          return const SizedBox.shrink();
+        }
+        return const Padding(
+          padding: ProjectPadding.rightSmall(),
+          child: SizedBox(
+            height: WidgetSizes.spacingXl,
+            width: WidgetSizes.spacingXl,
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 

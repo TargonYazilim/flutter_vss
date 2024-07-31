@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
+import 'package:flutter_vss/product/state/base/base_cubit.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/barcode/custom_barcode_scanner.dart';
 
-class OrderDetailViewModel extends Cubit<OrderDetailState> {
+class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   OrderDetailViewModel({
     required CustomBarcodeScanner barcodeScanner,
     required OrderOperation orderOperation,

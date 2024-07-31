@@ -18,7 +18,10 @@ class HiveCacheOperation<T extends CacheModel> extends CacheOperation<T> {
 
   @override
   void addAll(List<T> items) {
-    _box.putAll(Map.fromIterable(items));
+    final map = <String, T>{
+      for (final item in items) item.id: item,
+    };
+    _box.putAll(map);
   }
 
   @override
