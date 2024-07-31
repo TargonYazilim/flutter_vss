@@ -17,7 +17,6 @@ mixin LoginViewMixin on LoginBaseState<LoginView> {
   @override
   void initState() {
     super.initState();
-
     _loginViewModel = LoginViewModel(
       authenticationOperation: LoginService(productNetworkManager),
       loginResponseCacheOperation:
@@ -25,8 +24,8 @@ mixin LoginViewMixin on LoginBaseState<LoginView> {
       sharedCacheOperation: ProductStateItems.productSharedCache,
     );
 
-    viewModel.usernameController = TextEditingController(text: 'T999');
-    viewModel.passwordController = TextEditingController(text: 'VİBE');
+    viewModel..usernameController = TextEditingController(text: 'T999')
+    ..passwordController = TextEditingController(text: 'VİBE');
 
     _productNetworkErrorManager = ProductNetworkErrorManager(context);
 
@@ -44,10 +43,10 @@ mixin LoginViewMixin on LoginBaseState<LoginView> {
     viewModel.passwordController.dispose();
   }
 
-  pushToPage(bool result) {
-    print(result);
+  /// If login is success, push to HomeView
+  void pushToPage({required bool result}) {
     if (result) {
-      context.router.replace(HomeRoute());
+      context.router.replace(const HomeRoute());
     }
   }
 }

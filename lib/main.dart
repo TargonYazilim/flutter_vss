@@ -11,7 +11,7 @@ Future<void> main() async {
   await ApplicationInitialize().make();
 
   runApp(
-    StateInitialize(child: const MyApp()),
+    const StateInitialize(child: MyApp()),
   );
 }
 

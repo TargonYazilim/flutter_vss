@@ -29,9 +29,9 @@ mixin SplashViewMixin on SplashBaseState<SplashView> {
     _sharedCacheOperation = ProductStateItems.productSharedCache;
 
     if (loginResponseFromCache?.token != null) {
-      context.router.replace(HomeRoute());
+      context.router.replace(const HomeRoute());
     } else {
-      context.router.replace(LoginRoute());
+      context.router.replace(const LoginRoute());
     }
   }
 

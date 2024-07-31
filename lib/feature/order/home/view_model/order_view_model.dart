@@ -17,7 +17,7 @@ final class OrderViewModel extends Cubit<OrderState> {
   })  : _orderOperation = orderOperation,
         _loginResponseCacheOperation = loginResponseCacheOperation,
         _sharedCacheOperation = sharedCacheOperation,
-        super(OrderState(isLoading: false));
+        super(const OrderState(isLoading: false));
 
   final OrderOperation _orderOperation;
   final HiveCacheOperation<LoginResponseCacheModel>
@@ -29,11 +29,10 @@ final class OrderViewModel extends Cubit<OrderState> {
       changeLoading();
 
       if (userId != null) {
-        var result = await _orderOperation.getOrder(int.parse(userId!));
-        print(result);
-        if (result?.model?.errorCode == 1)
+        final result = await _orderOperation.getOrder(int.parse(userId!));
+        if (result?.model?.errorCode == 1) {
           _showError(result?.model?.result);
-        else {
+        } else {
           emit(state.copyWith(orderResponse: result!.model));
           //return _saveItems(result?.model);
         }
@@ -44,8 +43,8 @@ final class OrderViewModel extends Cubit<OrderState> {
   }
 
   /// Save users to hive cache
+  //TODO: Save order to cache
   bool _saveItems(LoginResponse? loginResponse) {
-    print("Login ? = ${loginResponse}");
     if (loginResponse == null) return false;
     _loginResponseCacheOperation
         .add(LoginResponseCacheModel(loginResponse: loginResponse));

@@ -1,6 +1,7 @@
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
 import 'package:flutter_vss/product/service/manager/product_service_path.dart';
+import 'package:flutter_vss/product/service/model/order/order_detail_response.dart';
 import 'package:flutter_vss/product/service/model/order/order_response.dart';
 
 final class OrderService extends OrderOperation {
@@ -14,6 +15,18 @@ final class OrderService extends OrderOperation {
       ProductServicePath.getOrder.value,
       queryParameters: {"LOGICALREF": logicalref},
       responseModel: OrderResponse(),
+      requestType: RequestType.GET,
+    );
+  }
+
+  @override
+  Future<IResponseModel<OrderDetailResponse?>?> getOrderDetail(
+      String siparisNumarasi) async {
+    return await _dioNexusManager
+        .sendRequest<OrderDetailResponse, OrderDetailResponse>(
+      ProductServicePath.getOrderDetail.value,
+      queryParameters: {"SiparisNumarasi": siparisNumarasi},
+      responseModel: OrderDetailResponse(),
       requestType: RequestType.GET,
     );
   }

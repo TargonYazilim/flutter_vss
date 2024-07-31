@@ -33,7 +33,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: OrderDetailView(
           key: args.key,
-          orders: args.orders,
+          order: args.order,
         ),
       );
     },
@@ -85,13 +85,13 @@ class LoginRoute extends PageRouteInfo<void> {
 class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
   OrderDetailRoute({
     Key? key,
-    required List<Order> orders,
+    required Order order,
     List<PageRouteInfo>? children,
   }) : super(
           OrderDetailRoute.name,
           args: OrderDetailRouteArgs(
             key: key,
-            orders: orders,
+            order: order,
           ),
           initialChildren: children,
         );
@@ -105,16 +105,16 @@ class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
 class OrderDetailRouteArgs {
   const OrderDetailRouteArgs({
     this.key,
-    required this.orders,
+    required this.order,
   });
 
   final Key? key;
 
-  final List<Order> orders;
+  final Order order;
 
   @override
   String toString() {
-    return 'OrderDetailRouteArgs{key: $key, orders: $orders}';
+    return 'OrderDetailRouteArgs{key: $key, order: $order}';
   }
 }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vss/feature/login/view_model/state/login_state.dart';
@@ -20,7 +22,7 @@ final class LoginViewModel extends Cubit<LoginState> {
   })  : _authenticationOperation = authenticationOperation,
         _loginResponseCacheOperation = loginResponseCacheOperation,
         _sharedCacheOperation = sharedCacheOperation,
-        super(LoginState(isLoading: false));
+        super(const LoginState(isLoading: false));
 
   final AuthenticationOperation _authenticationOperation;
   final HiveCacheOperation<LoginResponseCacheModel>
@@ -30,6 +32,7 @@ final class LoginViewModel extends Cubit<LoginState> {
   final GlobalKey<FormState> loginFormKey = GlobalKey();
   late final TextEditingController usernameController;
   late final TextEditingController passwordController;
+  
   Future<bool> login() async {
     if (!(loginFormKey.currentState?.validate() ?? true)) return false;
     if (state.isLoading) return false;
@@ -37,18 +40,17 @@ final class LoginViewModel extends Cubit<LoginState> {
     try {
       emit(state.copyWith(isLoading: true));
 
-      var deviceUniqueId = await DeviceUtility.instance.getUniqueDeviceId();
-      print(deviceUniqueId);
-      var result = await _authenticationOperation.login(
+      final deviceUniqueId = await DeviceUtility.instance.getUniqueDeviceId();
+      final result = await _authenticationOperation.login(
         Login(
           username: usernameController.text,
           password: passwordController.text,
           macaddress: deviceUniqueId,
         ),
       );
-      if (result?.model?.error == "1")
+      if (result?.model?.error == '1') {
         _showError(result?.model?.result);
-      else {
+      } else {
         await _saveUserId(result?.model?.id.toString());
         return _saveItems(result?.model);
       }
@@ -60,7 +62,6 @@ final class LoginViewModel extends Cubit<LoginState> {
 
   /// Save users to hive cache
   bool _saveItems(LoginResponse? loginResponse) {
-    print("Login ? = ${loginResponse}");
     if (loginResponse == null) return false;
     _loginResponseCacheOperation
         .add(LoginResponseCacheModel(loginResponse: loginResponse));

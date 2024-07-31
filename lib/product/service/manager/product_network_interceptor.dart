@@ -12,8 +12,9 @@ class ProductNetworkInterceptor implements InterceptorsWrapper {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    var token = await getToken();
-    options.headers[HttpHeaderEnum.Authorization.name] = '${HttpHeaderEnum.Bearer.name} $token';
+    final token = await getToken();
+    options.headers[HttpHeaderEnum.Authorization.name] =
+        '${HttpHeaderEnum.Bearer.name} $token';
     return handler.next(options);
   }
 
@@ -30,6 +31,7 @@ class ProductNetworkInterceptor implements InterceptorsWrapper {
         .token;
   }
 
+  /// Get userId from cache
   static String? get userId =>
       ProductStateItems.productSharedCache.get(SharedKeys.userId);
 }

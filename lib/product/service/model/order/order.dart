@@ -5,7 +5,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'order.g.dart';
 
 @JsonSerializable()
-class Order extends IDioNexusNetworkModel<Order> with EquatableMixin , BaseListviewModel<Order> {
+class Order extends IDioNexusNetworkModel<Order>
+    with EquatableMixin, BaseListviewModel<Order> {
   int? siparisLogicalRef;
   String? siparisNumarasi;
   String? siparisTarihi;
@@ -14,7 +15,7 @@ class Order extends IDioNexusNetworkModel<Order> with EquatableMixin , BaseListv
   int? cariLogicalRef;
   String? cariKodu;
   String? cariUnvan;
-
+//public string teslimatTarihi { get; set; }
   Order({
     this.siparisLogicalRef,
     this.siparisNumarasi,
@@ -67,7 +68,7 @@ class Order extends IDioNexusNetworkModel<Order> with EquatableMixin , BaseListv
       cariUnvan: cariUnvan ?? this.cariUnvan,
     );
   }
-  
+
   @override
-  String get title =>   '$cariUnvan - $siparisNumarasi - $sevkiyatYeri' ;
+  String get title => '$cariUnvan - $siparisNumarasi - $sevkiyatYeri';
 }

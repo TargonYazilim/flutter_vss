@@ -17,27 +17,28 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-            onPressed: onOperation,
-            child: Center(
-              child: (isLoading ?? false)
-                  ? SizedBox(
-                      height: WidgetSizes.spacingXl,
-                      width: WidgetSizes.spacingXl,
-                      child: CircularProgressIndicator(color: Colors.white),
-                    )
-                  : Text(
-                      text,
-                      style: context.general.appTheme.textTheme.labelLarge
-                          ?.copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-            ),
-            style: ElevatedButton.styleFrom(
-                elevation: (isLoading ?? false) ? 0 : 2,
-                backgroundColor: (isLoading ?? false)
-                    ? Colors.grey[30]
-                    : context.general.appTheme.colorScheme.primary))
-        .ext
-        .toDisabled(disable: (isLoading ?? false), opacity: 1);
+      onPressed: onOperation,
+      style: ElevatedButton.styleFrom(
+        elevation: (isLoading ?? false) ? 0 : 2,
+        backgroundColor: (isLoading ?? false)
+            ? Colors.grey[30]
+            : context.general.appTheme.colorScheme.primary,
+      ),
+      child: Center(
+        child: (isLoading ?? false)
+            ? const SizedBox(
+                height: WidgetSizes.spacingXl,
+                width: WidgetSizes.spacingXl,
+                child: CircularProgressIndicator(color: Colors.white),
+              )
+            : Text(
+                text,
+                style: context.general.appTheme.textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+      ),
+    ).ext.toDisabled(disable: isLoading ?? false, opacity: 1);
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 final class ProjectStrings {
   const ProjectStrings._();
 
+
   static const String order = 'Sevkiyat';
   static const String orders = 'Sevkiyatlar';
   static const String shipment = 'Yükleme';

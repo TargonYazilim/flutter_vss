@@ -18,7 +18,7 @@ class UsernamePasswordtextfield extends StatelessWidget {
             validator: (value) => ValidatorItems(value).validateUsername,
             maxLength: ProjectValues.usernameMaxLength,
             labelText: ProjectStrings.username),
-        SizedBox(height: WidgetSizes.spacingS),
+        const SizedBox(height: WidgetSizes.spacingS),
         ProductTextfield(
             controller: passwordController,
             validator: (value) => ValidatorItems(value).validatePassword,

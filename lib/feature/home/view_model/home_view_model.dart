@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/feature/home/view/home_view.dart';
@@ -25,6 +27,7 @@ abstract class HomeViewModel extends State<HomeView> {
   Future<void> logOut() async {
     _loginResponseCacheOperation.clear();
     await _sharedCacheOperation.clear();
-    context.router.replace(SplashRoute());
+    if (!mounted) return;
+    unawaited(context.router.replace(const SplashRoute()));
   }
 }

@@ -29,20 +29,19 @@ class _OrderViewState extends OrderBaseState<OrderView> with OrderViewMixin {
     return BlocProvider(
       create: (BuildContext context) => viewModel,
       child: Scaffold(
-        appBar: OrderAppbar(),
+        appBar: const OrderAppbar(),
         body: BlocBuilder<OrderViewModel, OrderState>(
           builder: (BuildContext context, state) {
-            if (state.isLoading)
-              return Center(child: const CircularProgressIndicator());
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return Padding(
-              padding:
-                  ProjectPadding.horizontalMedium() + ProjectPadding.topSmall(),
+              padding: const ProjectPadding.horizontalMedium() +
+                  const ProjectPadding.topSmall(),
               child: OrderListViewSeparated(
-                orders: state.orderResponse?.orders ?? [],
-                onPressed: (orderModel) {
-                  context.router.push(OrderDetailRoute(orders: []));
-                },
-              ),
+                  orders: state.orderResponse?.orders ?? [],
+                  onPressed: (order) =>
+                      context.router.push(OrderDetailRoute(order: order))),
             );
           },
         ),

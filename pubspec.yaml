@@ -29,6 +29,7 @@ dependencies:
 
   # Network
   dio_nexus: ^0.2.2
+  dio: ^5.5.0+1
 
   # State
   flutter_bloc: ^8.1.6

@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter_vss/feature/order/home/view/order_view.dart';
 import 'package:flutter_vss/feature/order/home/view_model/order_view_model.dart';
 import 'package:flutter_vss/feature/order/home/view_model/state/order_base_state.dart';
@@ -37,6 +39,4 @@ mixin OrderViewMixin on OrderBaseState<OrderView> {
   void dispose() {
     super.dispose();
   }
-
-  pushToPage(bool result) {}
 }
