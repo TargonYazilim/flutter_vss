@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vss/product/service/model/order/order_response.dart';
+import 'package:flutter_vss/product/service/model/order/order.dart';
 
 @immutable
 final class OrderState extends Equatable {
-  const OrderState({required this.isLoading, this.orderResponse});
-  final OrderResponse? orderResponse;
+  const OrderState({required this.isLoading, this.orders});
+  final List<Order>? orders;
   final bool isLoading;
 
   @override
-  List<Object?> get props => [orderResponse, isLoading];
+  List<Object?> get props => [orders, isLoading];
 
-  OrderState copyWith({bool? isLoading, OrderResponse? orderResponse}) {
+  OrderState copyWith({bool? isLoading, List<Order>? orders}) {
     return OrderState(
-      orderResponse: orderResponse ?? this.orderResponse,
+      orders: orders ?? this.orders,
       isLoading: isLoading ?? this.isLoading,
     );
   }

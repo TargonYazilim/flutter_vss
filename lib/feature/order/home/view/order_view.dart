@@ -9,6 +9,8 @@ import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
+import 'package:flutter_vss/product/utility/constants/widget_sizes.dart';
+import 'package:flutter_vss/product/utility/custom_refresh_indicator.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/product_listview_separated.dart';
 import 'package:kartal/kartal.dart';
 
@@ -30,31 +32,23 @@ class _OrderViewState extends OrderBaseState<OrderView> with OrderViewMixin {
       create: (BuildContext context) => viewModel,
       child: Scaffold(
         appBar: const OrderAppbar(),
-        body: BlocBuilder<OrderViewModel, OrderState>(
-          builder: (BuildContext context, state) {
-            if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Padding(
-              padding: const ProjectPadding.horizontalMedium() +
-                  const ProjectPadding.topSmall(),
-              child: OrderListViewSeparated(
-                  orders: state.orderResponse?.orders ?? [],
-                  onPressed: (order) =>
-                      context.router.push(OrderDetailRoute(order: order))),
-            );
-          },
+        body: _body(),
+      ),
+    );
+  }
+
+  Padding _body() {
+    return Padding(
+      padding: const ProjectPadding.horizontalMedium() +
+          const ProjectPadding.topSmall(),
+      child: CustomRefreshIndicator(
+        onRefresh: () => viewModel.fetchOrders(),
+        isListView: true,
+        child: OrderListViewSeparated(
+          onPressed: (order) =>
+              context.router.push(OrderDetailRoute(order: order)),
         ),
       ),
     );
   }
 }
-/*
-
-return BlocBuilder<HomeViewModel, HomeState>(
-      builder: (context, state) {
-        if (!state.isLoading) return const SizedBox.shrink();
-        return const CircularProgressIndicator.adaptive();
-      },
-    );
-*/

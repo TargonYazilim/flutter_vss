@@ -5,7 +5,6 @@ abstract class BaseCubit<T extends Object> extends Cubit<T> {
 
   @override
   void emit(T state) {
-    // TODO: implement emit
     if (isClosed) return;
     super.emit(state);
   }

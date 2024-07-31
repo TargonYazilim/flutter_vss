@@ -4,18 +4,20 @@ part of '../order_view.dart';
 
 class OrderListViewSeparated extends StatelessWidget {
   const OrderListViewSeparated({
-    super.key,
-    required this.orders,
     required this.onPressed,
+    super.key,
   });
 
-  final List<Order> orders;
   final void Function(Order orders) onPressed;
   @override
   Widget build(BuildContext context) {
-    return ProductListviewSeparated<Order>(
-      items: orders,
-      onPressed: onPressed.call,
+    return BlocBuilder<OrderViewModel, OrderState>(
+      builder: (BuildContext context, state) {
+        return ProductListviewSeparated<Order>(
+          items: state.orders ?? [],
+          onPressed: onPressed.call,
+        );
+      },
     );
   }
 }

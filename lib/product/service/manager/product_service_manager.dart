@@ -15,7 +15,7 @@ final class ProductNetworkManager extends DioNexusManager {
               HttpHeaders.contentTypeHeader: 'application/json',
             },
           ),
-          printLogsDebugMode: true,
+          printLogsDebugMode: false,
         );
 
   /// Error handler

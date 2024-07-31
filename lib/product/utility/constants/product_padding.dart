@@ -87,4 +87,18 @@ final class ProjectPadding extends EdgeInsets {
 
   /// [ProjectPadding.leftLarge] is 32
   const ProjectPadding.leftLarge() : super.only(left: 32);
+
+    /// Only Right Padding
+  ///
+  /// [ProjectPadding.rightSmall] is 8
+  const ProjectPadding.rightSmall() : super.only(right: 8);
+
+  /// [ProjectPadding.rightMedium] is 16
+  const ProjectPadding.rightMedium() : super.only(right: 16);
+
+  /// [ProjectPadding.rightNormal] is 20
+  const ProjectPadding.rightNormal() : super.only(right: 20);
+
+  /// [ProjectPadding.rightLarge] is 32
+  const ProjectPadding.rightLarge() : super.only(right: 32);
 }
