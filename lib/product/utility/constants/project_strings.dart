@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
 @immutable
@@ -18,4 +20,5 @@ final class ProjectStrings {
   static const String passwordEmptyError = 'Şifre boş olamaz';
   static const String login = 'Giriş yap';
   static const String logOut = 'Çıkış yap';
+  static const String scanBarcodeFailed = 'Barkod taranamadı';
 }

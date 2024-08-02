@@ -8,44 +8,48 @@ part 'order_detail.g.dart';
 @JsonSerializable()
 class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
     with EquatableMixin, BaseListviewModel<OrderDetail> {
-  String? malzemeKodu;
-  String? malzemeAdi;
-  String? birim;
-  int? miktar;
-
   OrderDetail({
     this.malzemeKodu,
     this.malzemeAdi,
     this.birim,
     this.miktar,
+    this.scanResult,
   });
-
-  @override
-  OrderDetail fromJson(Map<String, dynamic> json) => OrderDetail.fromJson(json);
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) =>
       _$OrderDetailFromJson(json);
+  String? malzemeKodu;
+  String? malzemeAdi;
+  String? birim;
+  int? miktar;
+  String? scanResult;
+
+  @override
+  OrderDetail fromJson(Map<String, dynamic> json) => OrderDetail.fromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$OrderDetailToJson(this);
 
   @override
-  List<Object?> get props => [malzemeKodu, malzemeAdi, birim, miktar];
+  List<Object?> get props =>
+      [malzemeKodu, malzemeAdi, birim, miktar, scanResult];
 
   OrderDetail copyWith({
     String? malzemeKodu,
     String? malzemeAdi,
     String? birim,
     int? miktar,
+    String? scanResult,
   }) {
     return OrderDetail(
       malzemeKodu: malzemeKodu ?? this.malzemeKodu,
       malzemeAdi: malzemeAdi ?? this.malzemeAdi,
       birim: birim ?? this.birim,
       miktar: miktar ?? this.miktar,
+      scanResult: scanResult ?? this.scanResult,
     );
   }
-  
+
   @override
-  String get title => '$malzemeAdi - $miktar $birim';
+  String get title => '$malzemeAdi - $miktar $birim - ${scanResult ?? ''}';
 }

@@ -1,24 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'order_detail.dart';
+part of 'barcode.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrderDetail _$OrderDetailFromJson(Map<String, dynamic> json) => OrderDetail(
+Barcode _$BarcodeFromJson(Map<String, dynamic> json) => Barcode(
       malzemeKodu: json['malzemeKodu'] as String?,
       malzemeAdi: json['malzemeAdi'] as String?,
       birim: json['birim'] as String?,
-      miktar: (json['miktar'] as num?)?.toInt(),
-      scanResult: json['scanResult'] as String?,
+      kilo: json['kilo'] as String?,
     );
 
-Map<String, dynamic> _$OrderDetailToJson(OrderDetail instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BarcodeToJson(Barcode instance) => <String, dynamic>{
       'malzemeKodu': instance.malzemeKodu,
       'malzemeAdi': instance.malzemeAdi,
       'birim': instance.birim,
-      'miktar': instance.miktar,
-      'scanResult': instance.scanResult,
+      'kilo': instance.kilo,
     };

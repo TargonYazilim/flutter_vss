@@ -22,6 +22,7 @@ final class HiveCacheManager extends CacheManager {
 
   @override
   void remove() {
+    Hive.closeAllBoxes();
     Hive.deleteAllBoxesFromDisk();
   }
 }

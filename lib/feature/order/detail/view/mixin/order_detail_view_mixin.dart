@@ -16,7 +16,7 @@ mixin OrderDetailViewMixin on OrderDetailBaseState<OrderDetailView> {
     _orderDetailViewModel = OrderDetailViewModel(
       barcodeScanner: CustomBarcodeScanner(),
       orderOperation: OrderService(productNetworkManager),
-      siparisNumarasi: widget.order.siparisNumarasi ?? '',
+      order: widget.order,
     );
 
     viewModel.fetchOrderDetails();

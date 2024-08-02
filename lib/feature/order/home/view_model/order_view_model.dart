@@ -38,7 +38,10 @@ final class OrderViewModel extends BaseCubit<OrderState> {
           _showError(result?.model?.result);
         } else {
           final orders = result?.model?.orders ?? [];
-          emit(state.copyWith(orders: orders));
+          print(orders.length);
+          if (orders.isNotEmpty) {
+            emit(state.copyWith(orders: orders));
+          }
           _saveOrdersToCache(orders);
         }
       }

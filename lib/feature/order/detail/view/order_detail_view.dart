@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,8 +19,8 @@ part 'widget/order_detail_listview_separated.dart';
 @RoutePage()
 class OrderDetailView extends StatefulWidget {
   const OrderDetailView({
-    super.key,
     required this.order,
+    super.key,
   });
   final Order order;
 
@@ -46,8 +48,8 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
                   return const Center(child: CircularProgressIndicator());
                 }
                 return OrderDetailListviewSeparated(
-                  orderDetails: state.orderDetailResponse?.orderLines ?? [],
-                  onPressed: (int index) async => viewModel.scanBarcode(),
+                  orderDetails: state.orderDetails ?? [],
+                  onPressed: viewModel.scanBarcode,
                 );
               },
             )),
