@@ -30,12 +30,12 @@ final class ApplicationInitialize {
     // TODO: Initializing without READ_DEVICE_CONFIG permission
     await DeviceUtility.instance.initPackageInfo();
 
-    FlutterError.onError = (details) {
+    /*FlutterError.onError = (details) {
       /// Crashlytics log insert here
       /// Custom service or custom logger insert here
       // Todo: add custom logger
       Logger().e(details.exceptionAsString());
-    };
+    };*/
 
     _productEnvironmentWithContainer();
 

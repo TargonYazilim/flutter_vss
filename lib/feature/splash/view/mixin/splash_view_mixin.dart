@@ -3,7 +3,8 @@ import 'package:flutter_vss/feature/splash/view/splash_view.dart';
 import 'package:flutter_vss/feature/splash/view_model/splash_view_model.dart';
 import 'package:flutter_vss/feature/splash/view_model/state/login_base_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
-import 'package:flutter_vss/product/cache/model/user_cache_model.dart';
+import 'package:flutter_vss/product/cache/model/login_cache_model.dart';
+import 'package:flutter_vss/product/cache/model/order_cache_model.dart';
 import 'package:flutter_vss/product/cache/shared/key/shared_keys.dart';
 import 'package:flutter_vss/product/cache/shared/shared_cache_operation.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
@@ -39,5 +40,6 @@ mixin SplashViewMixin on SplashBaseState<SplashView> {
   LoginResponse? get loginResponseFromCache =>
       _loginResponseCacheOperation.get(userId ?? '')?.loginResponse;
 
+  /// UserId from cache
   String? get userId => _sharedCacheOperation.get(SharedKeys.userId);
 }

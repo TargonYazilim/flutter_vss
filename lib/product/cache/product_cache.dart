@@ -1,7 +1,7 @@
 import 'package:flutter_vss/product/cache/core/cache_manager.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
+import 'package:flutter_vss/product/cache/model/login_cache_model.dart';
 import 'package:flutter_vss/product/cache/model/order_cache_model.dart';
-import 'package:flutter_vss/product/cache/model/user_cache_model.dart';
 
 /// [ProductCache] is a cache manager for the product module.
 final class ProductCache {
@@ -17,6 +17,11 @@ final class ProductCache {
         OrderCacheModel.empty(),
       ],
     );
+  }
+
+  /// Clear all from disk caches
+  void removeFromDisk()   {
+      _cacheManager.remove();
   }
 
   late final HiveCacheOperation<LoginResponseCacheModel>

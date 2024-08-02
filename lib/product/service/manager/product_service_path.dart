@@ -2,7 +2,8 @@
 enum ProductServicePath {
   login('$_user/Login'),
   getOrder('$_order/GetOrder'),
-  getOrderDetail('$_order/GetOrderDetail');
+  getOrderDetail('$_order/GetOrderDetail'),
+  scanOrderBarcode('$_order/ScanOrderBarcode');
 
   final String value;
   const ProductServicePath(this.value);

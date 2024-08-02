@@ -15,7 +15,6 @@ class Order extends IDioNexusNetworkModel<Order>
   int? cariLogicalRef;
   String? cariKodu;
   String? cariUnvan;
-//public string teslimatTarihi { get; set; }
   Order({
     this.siparisLogicalRef,
     this.siparisNumarasi,
