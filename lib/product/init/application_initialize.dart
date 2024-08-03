@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vss/product/init/config/app_environment.dart';
@@ -14,7 +13,7 @@ final class ApplicationInitialize {
     WidgetsFlutterBinding.ensureInitialized();
 
     await runZonedGuarded<Future<void>>(
-       _initialize,
+      _initialize,
       (error, stack) {
         Logger().e(error);
       },
@@ -30,17 +29,29 @@ final class ApplicationInitialize {
     // TODO: Initializing without READ_DEVICE_CONFIG permission
     await DeviceUtility.instance.initPackageInfo();
 
-    /*FlutterError.onError = (details) {
+    FlutterError.onError = (details) {
       /// Crashlytics log insert here
       /// Custom service or custom logger insert here
       // Todo: add custom logger
       Logger().e(details.exceptionAsString());
-    };*/
+    };
 
     _productEnvironmentWithContainer();
 
+    await _productCache();
+  }
+
+  static Future<void> _productCache() async {
+    /// Init caches
     await ProductStateItems.productCache.init();
     await ProductStateItems.productSharedCache.init();
+
+    /// Register models
+    ProductStateItems.productCache.register();
+
+    /// Open cache models boxes
+    await ProductStateItems.productCache.loginResponseCacheModel.open();
+    await ProductStateItems.productCache.orderCacheModel.open();
   }
 
   static void _productEnvironmentWithContainer() {

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vss/feature/login/view_model/state/login_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
-import 'package:flutter_vss/product/cache/model/login_cache_model.dart';
 import 'package:flutter_vss/product/cache/shared/key/shared_keys.dart';
 import 'package:flutter_vss/product/cache/shared/shared_cache_operation.dart';
 import 'package:flutter_vss/product/service/interface/authentication_operation.dart';
@@ -16,8 +15,7 @@ import 'package:kartal/kartal.dart';
 final class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel({
     required AuthenticationOperation authenticationOperation,
-    required HiveCacheOperation<LoginResponseCacheModel>
-        loginResponseCacheOperation,
+    required HiveCacheOperation<LoginResponse> loginResponseCacheOperation,
     required SharedCacheOperation sharedCacheOperation,
   })  : _authenticationOperation = authenticationOperation,
         _loginResponseCacheOperation = loginResponseCacheOperation,
@@ -25,14 +23,13 @@ final class LoginViewModel extends Cubit<LoginState> {
         super(const LoginState(isLoading: false));
 
   final AuthenticationOperation _authenticationOperation;
-  final HiveCacheOperation<LoginResponseCacheModel>
-      _loginResponseCacheOperation;
+  final HiveCacheOperation<LoginResponse> _loginResponseCacheOperation;
   final SharedCacheOperation _sharedCacheOperation;
 
   final GlobalKey<FormState> loginFormKey = GlobalKey();
   late final TextEditingController usernameController;
   late final TextEditingController passwordController;
-  
+
   Future<bool> login() async {
     if (!(loginFormKey.currentState?.validate() ?? true)) return false;
     if (state.isLoading) return false;
@@ -63,8 +60,7 @@ final class LoginViewModel extends Cubit<LoginState> {
   /// Save users to hive cache
   bool _saveItems(LoginResponse? loginResponse) {
     if (loginResponse == null) return false;
-    _loginResponseCacheOperation
-        .add(LoginResponseCacheModel(loginResponse: loginResponse));
+    _loginResponseCacheOperation.add(loginResponse);
     return true;
   }
 

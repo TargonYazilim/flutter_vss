@@ -11,7 +11,9 @@ class ProductNetworkInterceptor implements InterceptorsWrapper {
 
   @override
   Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final token = await getToken();
     options.headers[HttpHeaderEnum.Authorization.name] =
         '${HttpHeaderEnum.Bearer.name} $token';
@@ -19,7 +21,8 @@ class ProductNetworkInterceptor implements InterceptorsWrapper {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+      Response<dynamic> response, ResponseInterceptorHandler handler) {
     return handler.next(response);
   }
 
@@ -27,8 +30,7 @@ class ProductNetworkInterceptor implements InterceptorsWrapper {
     if (userId == null) return null;
     return ProductStateItems.productCache.loginResponseCacheModel
         .get(userId!)
-        ?.loginResponse
-        .token;
+        ?.token;
   }
 
   /// Get userId from cache

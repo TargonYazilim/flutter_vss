@@ -23,6 +23,7 @@ class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const HomeAppbar(),
       backgroundColor: context.general.appTheme.colorScheme.surface,
       body: Padding(
@@ -46,17 +47,19 @@ class _HomeViewState extends HomeViewModel {
               ),
             ),
             Expanded(
-                child: HomeCardButton(
-              text: ProjectStrings.shipment,
-              onTab: () {},
-              child: ProjectImages.imgShipment.toWidget(),
-            )),
+              child: HomeCardButton(
+                text: ProjectStrings.shipment,
+                onTab: () {},
+                child: ProjectImages.imgShipment.toWidget(),
+              ),
+            ),
           ],
         ),
         const SizedBox(height: WidgetSizes.spacingXxl9),
         TextButton(
-            onPressed: () async => logOut(),
-            child: const Text(ProjectStrings.logOut)),
+          onPressed: () async => logOut(),
+          child: const Text(ProjectStrings.logOut),
+        ),
         const Spacer(),
         const Text('Vibe'),
       ],
