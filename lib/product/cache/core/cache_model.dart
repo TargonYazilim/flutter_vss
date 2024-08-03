@@ -1,6 +1,5 @@
-mixin CacheModel {
-  String get id;
-
-  CacheModel fromDynamicJson(dynamic json);
+mixin CacheModel<T> {
+  String get cacheId;
   Map<String, dynamic> toJson();
+  T fromJson(Map<String, dynamic> json);
 }

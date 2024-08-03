@@ -19,8 +19,7 @@ mixin OrderViewMixin on OrderBaseState<OrderView> {
 
     _orderViewModel = OrderViewModel(
       orderOperation: OrderService(productNetworkManager),
-      orderCacheOperation:
-          ProductStateItems.productCache.orderCacheModel,
+      orderCacheOperation: ProductStateItems.productCache.orderCacheModel,
       sharedCacheOperation: ProductStateItems.productSharedCache,
     );
 

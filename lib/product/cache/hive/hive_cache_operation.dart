@@ -2,49 +2,39 @@ import 'package:flutter_vss/product/cache/core/cache_model.dart';
 import 'package:flutter_vss/product/cache/core/cache_operation.dart';
 import 'package:hive/hive.dart';
 
+part '../core/cache_manager_mixin.dart';
+
 /// The HiveCacheOperation class is an
 /// implementation of the CacheOperation class.
-class HiveCacheOperation<T extends CacheModel> extends CacheOperation<T> {
+class HiveCacheOperation<T extends CacheModel<T>> extends CacheOperation<T>
+    with CacheManagerMixin<T> {
   /// Initialize hive box
-  HiveCacheOperation() {
-    _box = Hive.box<T>(name: T.toString());
-  }
-  late final Box<T> _box;
 
   @override
   void add(T item) {
-    _box.put(item.id, item);
+    _box?.put(item.cacheId, item);
   }
 
   @override
   void addAll(List<T> items) {
     final map = <String, T>{
-      for (final item in items) item.id: item,
+      for (final item in items) item.cacheId: item,
     };
-    _box.putAll(map);
-  }
-
-  @override
-  void clear() {
-    _box.clear();
+    _box?.putAll(map);
   }
 
   @override
   T? get(String id) {
-    return _box.get(id);
+    return _box?.get(id);
   }
 
   @override
   List<T> getAll() {
-    return _box
-        .getAll(_box.keys)
-        .where((element) => element != null)
-        .cast<T>()
-        .toList();
+    return _box?.values.cast<T>().toList() ?? [];
   }
 
   @override
   void remove(String id) {
-    _box.delete(id);
+    _box?.delete(id);
   }
 }

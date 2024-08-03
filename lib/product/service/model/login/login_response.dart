@@ -1,12 +1,13 @@
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_vss/product/cache/core/cache_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_response.g.dart';
 
 @JsonSerializable()
 class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
-    with EquatableMixin {
+    with EquatableMixin, CacheModel<LoginResponse> {
   int? id;
   String? error;
   String? result;
@@ -18,6 +19,8 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
     this.result,
     this.token,
   });
+
+  LoginResponse.empty();
 
   @override
   LoginResponse fromJson(Map<String, dynamic> json) =>
@@ -45,4 +48,7 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
       token: token ?? this.token,
     );
   }
+
+  @override
+  String get cacheId => id.toString();
 }

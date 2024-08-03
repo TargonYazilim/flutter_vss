@@ -1,6 +1,5 @@
 import 'package:flutter_vss/feature/order/home/view_model/state/order_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
-import 'package:flutter_vss/product/cache/model/order_cache_model.dart';
 import 'package:flutter_vss/product/cache/shared/key/shared_keys.dart';
 import 'package:flutter_vss/product/cache/shared/shared_cache_operation.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
@@ -11,7 +10,7 @@ import 'package:flutter_vss/product/state/container/product_state_items.dart';
 final class OrderViewModel extends BaseCubit<OrderState> {
   OrderViewModel({
     required OrderOperation orderOperation,
-    required HiveCacheOperation<OrderCacheModel> orderCacheOperation,
+    required HiveCacheOperation<Order> orderCacheOperation,
     required SharedCacheOperation sharedCacheOperation,
   })  : _orderOperation = orderOperation,
         _orderCacheOperation = orderCacheOperation,
@@ -22,7 +21,7 @@ final class OrderViewModel extends BaseCubit<OrderState> {
   final OrderOperation _orderOperation;
 
   /// Hive cache operation for orders
-  final HiveCacheOperation<OrderCacheModel> _orderCacheOperation;
+  final HiveCacheOperation<Order> _orderCacheOperation;
 
   /// Shared cache
   final SharedCacheOperation _sharedCacheOperation;
@@ -38,7 +37,6 @@ final class OrderViewModel extends BaseCubit<OrderState> {
           _showError(result?.model?.result);
         } else {
           final orders = result?.model?.orders ?? [];
-          print(orders.length);
           if (orders.isNotEmpty) {
             emit(state.copyWith(orders: orders));
           }
@@ -53,12 +51,7 @@ final class OrderViewModel extends BaseCubit<OrderState> {
   /// Save users to hive cache
   void _saveOrdersToCache(List<Order>? orders) {
     if (orders == null) return;
-    _orderCacheOperation.addAll(
-      List.generate(
-        orders.length,
-        (index) => OrderCacheModel(order: orders[index]),
-      ),
-    );
+    _orderCacheOperation.addAll(orders);
   }
 
   /// Get Orders from cache
@@ -67,8 +60,9 @@ final class OrderViewModel extends BaseCubit<OrderState> {
     final orders = <Order>[];
 
     for (final orderItem in result) {
-      orders.add(orderItem.order);
+      orders.add(orderItem);
     }
+
     emit(state.copyWith(orders: orders));
   }
 

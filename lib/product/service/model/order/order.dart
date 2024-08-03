@@ -1,12 +1,13 @@
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_vss/product/cache/core/cache_model.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/base_listview_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'order.g.dart';
 
 @JsonSerializable()
 class Order extends IDioNexusNetworkModel<Order>
-    with EquatableMixin, BaseListviewModel<Order> {
+    with EquatableMixin, BaseListviewModel<Order>, CacheModel<Order> {
   int? siparisLogicalRef;
   String? siparisNumarasi;
   String? siparisTarihi;
@@ -15,6 +16,7 @@ class Order extends IDioNexusNetworkModel<Order>
   int? cariLogicalRef;
   String? cariKodu;
   String? cariUnvan;
+
   Order({
     this.siparisLogicalRef,
     this.siparisNumarasi,
@@ -25,6 +27,7 @@ class Order extends IDioNexusNetworkModel<Order>
     this.cariKodu,
     this.cariUnvan,
   });
+  Order.empty();
 
   @override
   Order fromJson(Map<String, dynamic> json) => Order.fromJson(json);
@@ -70,4 +73,7 @@ class Order extends IDioNexusNetworkModel<Order>
 
   @override
   String get title => '$cariUnvan - $siparisNumarasi - $sevkiyatYeri';
+
+  @override
+  String get cacheId => siparisLogicalRef.toString();
 }
