@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vss/product/init/config/app_environment.dart';
@@ -42,8 +43,10 @@ final class ApplicationInitialize {
   }
 
   static Future<void> _productCache() async {
-    /// Init caches
+    /// Init hive
     await ProductStateItems.productCache.init();
+
+    /// Init shared preferences
     await ProductStateItems.productSharedCache.init();
 
     /// Register models
@@ -52,6 +55,7 @@ final class ApplicationInitialize {
     /// Open cache models boxes
     await ProductStateItems.productCache.loginResponseCacheModel.open();
     await ProductStateItems.productCache.orderCacheModel.open();
+    await ProductStateItems.productCache.barcodeCacheModel.open();
   }
 
   static void _productEnvironmentWithContainer() {

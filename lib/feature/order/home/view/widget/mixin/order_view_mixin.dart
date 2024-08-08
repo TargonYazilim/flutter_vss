@@ -31,7 +31,7 @@ mixin OrderViewMixin on OrderBaseState<OrderView> {
       },
     );
 
-    viewModel.fetchOrders();
+    viewModel.getAllOrdersFromCache();
   }
 
   @override

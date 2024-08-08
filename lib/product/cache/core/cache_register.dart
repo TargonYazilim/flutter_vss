@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 /// Hive register adapters manager
 final class CacheRegisterAdapter<T extends CacheModel<T>>
     extends TypeAdapter<T> {
+
   CacheRegisterAdapter(this.fromJson, this.hiveAdapterId);
 
   ///fromJson for read data from cache and to model
@@ -31,3 +32,4 @@ final class CacheRegisterAdapter<T extends CacheModel<T>>
     writer.write(obj.toJson());
   }
 }
+

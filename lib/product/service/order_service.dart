@@ -2,8 +2,7 @@ import 'package:dio_nexus/dio_nexus.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
 import 'package:flutter_vss/product/service/manager/enums/query_parameters_enum.dart';
 import 'package:flutter_vss/product/service/manager/product_service_path.dart';
-import 'package:flutter_vss/product/service/model/order/order_barcode_scan_response.dart';
-import 'package:flutter_vss/product/service/model/order/order_detail_response.dart';
+import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_response.dart';
 
 final class OrderService extends OrderOperation {
@@ -22,36 +21,17 @@ final class OrderService extends OrderOperation {
   }
 
   @override
-  Future<IResponseModel<OrderDetailResponse?>?> getOrderDetail(
-    String siparisNumarasi,
+  Future<IResponseModel<List<String>?>?> saveScanOrders(
+    List<Order> orders,
   ) async {
-    return _dioNexusManager
-        .sendRequest<OrderDetailResponse, OrderDetailResponse>(
-      ProductServicePath.getOrderDetail.value,
-      queryParameters: {
-        QueryParametersEnum.siparisNumarasi.name: siparisNumarasi,
-      },
-      responseModel: OrderDetailResponse(),
-      requestType: RequestType.GET,
+    final resp = await _dioNexusManager
+        .sendRequest<NexusModel<List<String>>, List<String>>(
+      ProductServicePath.saveScanOrder.value,
+      responseModel: NexusModel<List<String>>(),
+      data: orders,
+      requestType: RequestType.POST,
     );
-  }
-
-  @override
-  Future<IResponseModel<OrderBarcodeScanResponse?>?> scanOrderBarcode(
-    String barcode,
-    String siparisNumarasi,
-    String malzemeKodu,
-  ) async {
-    return _dioNexusManager
-        .sendRequest<OrderBarcodeScanResponse, OrderBarcodeScanResponse>(
-      ProductServicePath.scanOrderBarcode.value,
-      queryParameters: {
-        QueryParametersEnum.barkod.name: barcode,
-        QueryParametersEnum.siparisNumarasi.name: siparisNumarasi,
-        QueryParametersEnum.malzemeKodu.name: malzemeKodu,
-      },
-      responseModel: OrderBarcodeScanResponse(),
-      requestType: RequestType.GET,
-    );
+    print(resp);
+    return null;
   }
 }

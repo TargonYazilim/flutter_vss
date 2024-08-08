@@ -13,7 +13,7 @@ final class LoginService extends AuthenticationOperation {
 
   @override
   Future<IResponseModel<LoginResponse?>?> login(Login login) async {
-    return await _dioNexusManager.sendRequest<LoginResponse, LoginResponse>(
+    return  _dioNexusManager.sendRequest<LoginResponse, LoginResponse>(
       ProductServicePath.login.value,
       responseModel: LoginResponse(),
       data: login,

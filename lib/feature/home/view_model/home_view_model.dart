@@ -18,7 +18,8 @@ abstract class HomeViewModel extends State<HomeView> {
   }
 
   Future<void> logOut() async {
-    await ProductStateItems.productCache.removeFromDisk();
+    await ProductStateItems.productCache.loginResponseCacheModel.clear();
+    await ProductStateItems.productCache.orderCacheModel.clear();
     await _sharedCacheOperation.clear();
     if (!mounted) return;
     unawaited(context.router.replace(const SplashRoute()));

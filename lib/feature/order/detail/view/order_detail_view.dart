@@ -10,6 +10,8 @@ import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_s
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_detail.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
+import 'package:flutter_vss/product/utility/custom_refresh_indicator.dart';
+import 'package:flutter_vss/product/utility/size/widget_size.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/product_listview_separated.dart';
 import 'package:kartal/kartal.dart';
 
@@ -34,25 +36,26 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => viewModel,
-      child: Padding(
-        padding: const ProjectPadding.horizontalMedium() +
-            const ProjectPadding.topSmall(),
-        child: Scaffold(
-            appBar: OrderDetailAppbar(
-              title:
-                  '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
-            ),
-            body: BlocBuilder<OrderDetailViewModel, OrderDetailState>(
-              builder: (BuildContext context, state) {
-                if (state.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return OrderDetailListviewSeparated(
-                  orderDetails: state.orderDetails ?? [],
-                  onPressed: viewModel.scanBarcode,
-                );
-              },
-            )),
+      child: Scaffold(
+        appBar: OrderDetailAppbar(
+          title:
+              '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
+        ),
+        body: _body(),
+      ),
+    );
+  }
+
+  Padding _body() {
+    return Padding(
+      padding: const ProjectPadding.horizontalMedium() +
+          const ProjectPadding.topSmall(),
+      child: CustomRefreshIndicator(
+        onRefresh: () async => viewModel.getAllOrderDetailsFromCache(),
+        isListView: true,
+        child: OrderDetailListviewSeparated(
+          onPressed: viewModel.scanBarcode,
+        ),
       ),
     );
   }

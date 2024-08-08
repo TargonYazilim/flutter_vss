@@ -1,6 +1,7 @@
 import 'package:dio_nexus/dio_nexus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_vss/product/cache/core/cache_model.dart';
+import 'package:flutter_vss/product/service/model/order/order_detail.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/base_listview_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'order.g.dart';
@@ -8,6 +9,7 @@ part 'order.g.dart';
 @JsonSerializable()
 class Order extends IDioNexusNetworkModel<Order>
     with EquatableMixin, BaseListviewModel<Order>, CacheModel<Order> {
+  int? id;
   int? siparisLogicalRef;
   String? siparisNumarasi;
   String? siparisTarihi;
@@ -16,8 +18,11 @@ class Order extends IDioNexusNetworkModel<Order>
   int? cariLogicalRef;
   String? cariKodu;
   String? cariUnvan;
+  bool? synchronized;
+  List<OrderDetail>? orderDetails;
 
   Order({
+    this.id,
     this.siparisLogicalRef,
     this.siparisNumarasi,
     this.siparisTarihi,
@@ -26,6 +31,8 @@ class Order extends IDioNexusNetworkModel<Order>
     this.cariLogicalRef,
     this.cariKodu,
     this.cariUnvan,
+    this.orderDetails,
+    this.synchronized = false,
   });
   Order.empty();
 
@@ -46,10 +53,13 @@ class Order extends IDioNexusNetworkModel<Order>
         sevkiyatAdresi,
         cariLogicalRef,
         cariKodu,
-        cariUnvan
+        cariUnvan,
+        orderDetails,
+        synchronized,
       ];
 
   Order copyWith({
+    int? id,
     int? siparisLogicalRef,
     String? siparisNumarasi,
     String? siparisTarihi,
@@ -58,8 +68,11 @@ class Order extends IDioNexusNetworkModel<Order>
     int? cariLogicalRef,
     String? cariKodu,
     String? cariUnvan,
+    bool? synchronized,
+    List<OrderDetail>? orderDetails,
   }) {
     return Order(
+      id: id ?? this.id,
       siparisLogicalRef: siparisLogicalRef ?? this.siparisLogicalRef,
       siparisNumarasi: siparisNumarasi ?? this.siparisNumarasi,
       siparisTarihi: siparisTarihi ?? this.siparisTarihi,
@@ -68,6 +81,8 @@ class Order extends IDioNexusNetworkModel<Order>
       cariLogicalRef: cariLogicalRef ?? this.cariLogicalRef,
       cariKodu: cariKodu ?? this.cariKodu,
       cariUnvan: cariUnvan ?? this.cariUnvan,
+      synchronized: synchronized ?? this.synchronized,
+      orderDetails: orderDetails ?? this.orderDetails,
     );
   }
 

@@ -23,11 +23,10 @@ final class ToastManager extends ToastService {
   void _showToast({required String message, required Color color}) {
     Fluttertoast.showToast(
         msg: message,
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.TOP,
-        timeInSecForIosWeb: 1,
         backgroundColor: color,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16);
   }
 }

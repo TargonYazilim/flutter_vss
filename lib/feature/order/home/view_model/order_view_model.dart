@@ -27,10 +27,9 @@ final class OrderViewModel extends BaseCubit<OrderState> {
   final SharedCacheOperation _sharedCacheOperation;
 
   /// Get orders from API
-  Future<void> fetchOrders() async {
+  Future<void> fetchOrdersFromDb() async {
     try {
       changeLoading();
-      _getAllOrdersFromCache();
       if (userId != null) {
         final result = await _orderOperation.getOrder(int.parse(userId!));
         if (result?.model?.errorCode == 1) {
@@ -48,22 +47,21 @@ final class OrderViewModel extends BaseCubit<OrderState> {
     }
   }
 
-  /// Save users to hive cache
+  /// Save orders to hive cache
   void _saveOrdersToCache(List<Order>? orders) {
     if (orders == null) return;
     _orderCacheOperation.addAll(orders);
   }
 
   /// Get Orders from cache
-  void _getAllOrdersFromCache() {
-    final result = _orderCacheOperation.getAll();
-    final orders = <Order>[];
-
-    for (final orderItem in result) {
-      orders.add(orderItem);
+  void getAllOrdersFromCache() {
+    try {
+      changeLoading();
+      final orders = _orderCacheOperation.getAll();
+      emit(state.copyWith(orders: orders));
+    } finally {
+      changeLoading();
     }
-
-    emit(state.copyWith(orders: orders));
   }
 
   void _showError(String? message) {
@@ -72,7 +70,7 @@ final class OrderViewModel extends BaseCubit<OrderState> {
   }
 
   /// Get UserId from cache
-  String? get userId => _sharedCacheOperation.get(SharedKeys.userId);
+  String? get userId => _sharedCacheOperation.get<String>(SharedKeys.userId);
 
   /// Change loading state
   void changeLoading() {

@@ -46,7 +46,7 @@ mixin LoginViewMixin on LoginBaseState<LoginView> {
   /// If login is success, push to HomeView
   void pushToPage({required bool result}) {
     if (result) {
-      context.router.replace(const HomeRoute());
+      context.router.replace(const SplashRoute());
     }
   }
 }
