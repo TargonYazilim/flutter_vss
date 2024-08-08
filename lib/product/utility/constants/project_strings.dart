@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 final class ProjectStrings {
   const ProjectStrings._();
 
-
   static const String order = 'Sevkiyat';
   static const String orders = 'Sevkiyatlar';
   static const String shipment = 'Yükleme';
@@ -21,4 +20,8 @@ final class ProjectStrings {
   static const String login = 'Giriş yap';
   static const String logOut = 'Çıkış yap';
   static const String scanBarcodeFailed = 'Barkod taranamadı';
+  static const String barcodeNotFound =
+      'Barkod bulunamadı!\n Senkronizasyon yapıp tekrar deneyiniz';
+  static const String barcodesDoNotMatch = 'Barkodlar uyuşmuyor';
+  static const String barcodeMatched = 'Barkod tarandı';
 }

@@ -24,6 +24,11 @@ class HiveCacheOperation<T extends CacheModel<T>> extends CacheOperation<T>
   }
 
   @override
+  void update(T item) {
+    _box?.put(item.cacheId, item);
+  }
+
+  @override
   T? get(String id) {
     return _box?.get(id);
   }

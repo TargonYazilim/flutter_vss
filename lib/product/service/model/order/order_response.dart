@@ -5,7 +5,8 @@ import 'order.dart';
 part 'order_response.g.dart';
 
 @JsonSerializable()
-class OrderResponse extends IDioNexusNetworkModel<OrderResponse> with EquatableMixin {
+class OrderResponse extends IDioNexusNetworkModel<OrderResponse>
+    with EquatableMixin {
   int? errorCode;
   String? result;
   List<Order>? orders;
@@ -17,9 +18,11 @@ class OrderResponse extends IDioNexusNetworkModel<OrderResponse> with EquatableM
   });
 
   @override
-  OrderResponse fromJson(Map<String, dynamic> json) => OrderResponse.fromJson(json);
+  OrderResponse fromJson(Map<String, dynamic> json) =>
+      OrderResponse.fromJson(json);
 
-  factory OrderResponse.fromJson(Map<String, dynamic> json) => _$OrderResponseFromJson(json);
+  factory OrderResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrderResponseFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$OrderResponseToJson(this);

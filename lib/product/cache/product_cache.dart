@@ -1,5 +1,6 @@
 import 'package:flutter_vss/product/cache/core/cache_manager.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
+import 'package:flutter_vss/product/service/model/barcode/barcode.dart';
 import 'package:flutter_vss/product/service/model/login/login_response.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 
@@ -29,4 +30,7 @@ final class ProductCache {
 
   late final HiveCacheOperation<Order> orderCacheModel =
       HiveCacheOperation<Order>();
+
+  late final HiveCacheOperation<Barcode> barcodeCacheModel =
+      HiveCacheOperation<Barcode>();
 }

@@ -26,7 +26,6 @@ class _LoginViewState extends LoginBaseState<LoginView> with LoginViewMixin {
   Widget build(BuildContext context) {
     return CustomKeyboardDismisser(
       child: Scaffold(
-        floatingActionButton: const Icon(Icons.add),
         body: Padding(
           padding: const ProjectPadding.horizontalMedium(),
           child: Column(

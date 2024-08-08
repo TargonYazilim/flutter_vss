@@ -42,7 +42,7 @@ class _OrderViewState extends OrderBaseState<OrderView> with OrderViewMixin {
       padding: const ProjectPadding.horizontalMedium() +
           const ProjectPadding.topSmall(),
       child: CustomRefreshIndicator(
-        onRefresh: () => viewModel.fetchOrders(),
+        onRefresh: () => viewModel.fetchOrdersFromDb(),
         isListView: true,
         child: OrderListViewSeparated(
           onPressed: (order) =>

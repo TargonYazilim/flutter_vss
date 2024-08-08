@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/feature/splash/view/mixin/splash_view_mixin.dart';
-import 'package:flutter_vss/feature/splash/view_model/state/login_base_state.dart';
+import 'package:flutter_vss/feature/splash/view_model/state/splash_base_state.dart';
 
 @RoutePage()
 class SplashView extends StatefulWidget {

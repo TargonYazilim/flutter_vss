@@ -8,11 +8,33 @@ class OrderDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 1,
       shadowColor: context.general.appTheme.colorScheme.shadow,
-      title: Text(title,
-          style: context.general.appTheme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: context.general.appTheme.colorScheme.onSurface)),
+      title: Text(
+        title,
+        style: context.general.appTheme.textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+          color: context.general.appTheme.colorScheme.onSurface,
+        ),
+      ),
+      actions: [LoadingBlocBuilder()],
       centerTitle: true,
+    );
+  }
+
+  Widget LoadingBlocBuilder() {
+    return BlocBuilder<OrderDetailViewModel, OrderDetailState>(
+      builder: (BuildContext context, state) {
+        if (!state.isLoading) {
+          return const SizedBox.shrink();
+        }
+        return const Padding(
+          padding: ProjectPadding.rightSmall(),
+          child: SizedBox(
+            height: WidgetSizes.spacingXl,
+            width: WidgetSizes.spacingXl,
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 

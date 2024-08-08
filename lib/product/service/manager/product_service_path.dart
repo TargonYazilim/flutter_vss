@@ -1,9 +1,10 @@
-///Project service path
+// ignore_for_file: public_member_api_docs
+
 enum ProductServicePath {
   login('$_user/Login'),
   getOrder('$_order/GetOrder'),
-  getOrderDetail('$_order/GetOrderDetail'),
-  scanOrderBarcode('$_order/ScanOrderBarcode');
+  getBarcodes('$_barcode/GetBarcodes'),
+  saveScanOrder('$_barcode/ScanOrderBarcode');
 
   final String value;
   const ProductServicePath(this.value);
@@ -12,10 +13,11 @@ enum ProductServicePath {
   ///
   /// Example: users/123
   String withQuery(String query) {
-    return '${this.value}/$query';
+    return '$value/$query';
   }
 
   /// Api UserProfile name
   static const String _user = 'Users/';
   static const String _order = 'Order/';
+  static const String _barcode = 'Barcode/';
 }
