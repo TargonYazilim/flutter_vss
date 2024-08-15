@@ -33,7 +33,6 @@ final class LoginViewModel extends Cubit<LoginState> {
   Future<bool> login() async {
     if (!(loginFormKey.currentState?.validate() ?? true)) return false;
     if (state.isLoading) return false;
-
     try {
       emit(state.copyWith(isLoading: true));
 

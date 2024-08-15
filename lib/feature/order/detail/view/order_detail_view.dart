@@ -4,11 +4,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vss/feature/order/detail/view/mixin/order_detail_view_mixin.dart';
+import 'package:flutter_vss/feature/order/detail/view/widget/order_detail_loading.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/order_detail_view_model.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_base_state.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_detail.dart';
+import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/custom_refresh_indicator.dart';
 import 'package:flutter_vss/product/utility/size/widget_size.dart';
@@ -36,17 +38,20 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => viewModel,
-      child: Scaffold(
-        appBar: OrderDetailAppbar(
-          title:
-              '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
+      child: OrderDetailLoading(
+        parentChild: Scaffold(
+          appBar: OrderDetailAppbar(
+            title:
+                '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
+          ),
+          body: _body(),
         ),
-        body: _body(),
+        loadingNotifier: viewModel.isLoading,
       ),
     );
   }
 
-  Padding _body() {
+  Widget _body() {
     return Padding(
       padding: const ProjectPadding.horizontalMedium() +
           const ProjectPadding.topSmall(),
@@ -55,6 +60,7 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
         isListView: true,
         child: OrderDetailListviewSeparated(
           onPressed: viewModel.scanBarcode,
+          onDelete: viewModel.deleteScanBarcode,
         ),
       ),
     );

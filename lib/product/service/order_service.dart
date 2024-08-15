@@ -2,6 +2,7 @@ import 'package:dio_nexus/dio_nexus.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
 import 'package:flutter_vss/product/service/manager/enums/query_parameters_enum.dart';
 import 'package:flutter_vss/product/service/manager/product_service_path.dart';
+import 'package:flutter_vss/product/service/model/barcode/scan_barcode_response.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_response.dart';
 
@@ -21,17 +22,15 @@ final class OrderService extends OrderOperation {
   }
 
   @override
-  Future<IResponseModel<List<String>?>?> saveScanOrders(
+  Future<IResponseModel<List<ScanBarcodeResponse>?>?> saveScanOrders(
     List<Order> orders,
   ) async {
-    final resp = await _dioNexusManager
-        .sendRequest<NexusModel<List<String>>, List<String>>(
+    return _dioNexusManager
+        .sendRequest<ScanBarcodeResponse, List<ScanBarcodeResponse>?>(
       ProductServicePath.saveScanOrder.value,
-      responseModel: NexusModel<List<String>>(),
+      responseModel: ScanBarcodeResponse(),
       data: orders,
       requestType: RequestType.POST,
     );
-    print(resp);
-    return null;
   }
 }

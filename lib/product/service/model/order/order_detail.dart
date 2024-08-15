@@ -11,7 +11,7 @@ part 'order_detail.g.dart';
 class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
     with
         EquatableMixin,
-        BaseListviewModel<OrderDetail>,
+        BaseListviewModel<OrderDetail, Scan>,
         CacheModel<OrderDetail> {
   OrderDetail({
     this.id,
@@ -65,9 +65,11 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
   }
 
   @override
-  String get title =>
-      '$malzemeAdi - $miktar $birim - ${scans?.first.result ?? ''}';
+  String get title => '$malzemeAdi - $miktar $birim';
 
   @override
   String get cacheId => siparisId.toString();
+
+  @override
+  List<Scan> get subList => scans ?? [];
 }

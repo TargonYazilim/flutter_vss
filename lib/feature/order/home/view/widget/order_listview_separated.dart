@@ -13,7 +13,7 @@ class OrderListViewSeparated extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderViewModel, OrderState>(
       builder: (BuildContext context, state) {
-        return ProductListviewSeparated<Order>(
+        return ProductListviewSeparated<Order, Scan>(
           items: state.orders ?? [],
           onPressed: onPressed.call,
         );

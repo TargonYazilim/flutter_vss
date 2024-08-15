@@ -9,7 +9,10 @@ final class OrderDetailState extends Equatable {
   @override
   List<Object?> get props => [orderDetails, isLoading];
 
-  OrderDetailState copyWith({bool? isLoading, List<OrderDetail>? orderDetails}) {
+  OrderDetailState copyWith({
+    bool? isLoading,
+    List<OrderDetail>? orderDetails,
+  }) {
     return OrderDetailState(
       orderDetails: orderDetails ?? this.orderDetails,
       isLoading: isLoading ?? this.isLoading,
