@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
+import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
 import 'package:flutter_vss/product/service/interface/scan_operation.dart';
 import 'package:flutter_vss/product/service/model/barcode/barcode.dart';
@@ -221,6 +223,10 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     }
 
     return false;
+  }
+
+  void pushToWayybillView(BuildContext context) {
+    context.router.push(WayyBillRoute(order: _order));
   }
 
   /// Operation loading
