@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_vss/product/utility/modal_barrier/custom_modal_barrier.dart';
+
+part of '../order_detail_view.dart';
 
 class OrderDetailLoading extends StatelessWidget {
   const OrderDetailLoading({

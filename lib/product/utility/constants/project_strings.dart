@@ -28,4 +28,7 @@ final class ProjectStrings {
   static const String removeBarcodeScanSuccess = 'Barkod silindi';
   static const String printWaybill = 'İrsaliye Yazdır';
   static const String barcodeLimit = 'Daha fazla barkod okutamazsınız';
+  static const String somethingError = 'Bir hata oluştu';
+  static const String deliveredBy = 'Teslim Eden';
+  static const String recipient = 'Teslim Alan';
 }

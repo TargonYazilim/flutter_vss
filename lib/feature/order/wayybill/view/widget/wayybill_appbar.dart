@@ -1,7 +1,12 @@
-part of '../order_detail_view.dart';
+// ignore_for_file: public_member_api_docs
 
-class OrderDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const OrderDetailAppbar({super.key, required this.title});
+part of '../wayybill_view.dart';
+
+class WayyBillAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const WayyBillAppbar({
+    required this.title,
+    super.key,
+  });
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class OrderDetailAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget LoadingBlocBuilder() {
-    return BlocBuilder<OrderDetailViewModel, OrderDetailState>(
+    return BlocBuilder<WayybillViewModel, WayybillState>(
       builder: (BuildContext context, state) {
         if (!state.isLoading) {
           return const SizedBox.shrink();

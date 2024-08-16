@@ -49,6 +49,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashView(),
       );
     },
+    WayyBillRoute.name: (routeData) {
+      final args = routeData.argsAs<WayyBillRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WayyBillView(
+          order: args.order,
+          key: args.key,
+        ),
+      );
+    },
   };
 }
 
@@ -144,4 +154,42 @@ class SplashRoute extends PageRouteInfo<void> {
   static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WayyBillView]
+class WayyBillRoute extends PageRouteInfo<WayyBillRouteArgs> {
+  WayyBillRoute({
+    required Order order,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          WayyBillRoute.name,
+          args: WayyBillRouteArgs(
+            order: order,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'WayyBillRoute';
+
+  static const PageInfo<WayyBillRouteArgs> page =
+      PageInfo<WayyBillRouteArgs>(name);
+}
+
+class WayyBillRouteArgs {
+  const WayyBillRouteArgs({
+    required this.order,
+    this.key,
+  });
+
+  final Order order;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'WayyBillRouteArgs{order: $order, key: $key}';
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_vss/feature/home/view/home_view.dart';
 import 'package:flutter_vss/feature/login/view/login_view.dart';
 import 'package:flutter_vss/feature/order/detail/view/order_detail_view.dart';
 import 'package:flutter_vss/feature/order/home/view/order_view.dart';
+import 'package:flutter_vss/feature/order/wayybill/view/wayybill_view.dart';
 import 'package:flutter_vss/feature/splash/view/splash_view.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 
@@ -18,5 +19,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: OrderRoute.page),
         AutoRoute(page: OrderDetailRoute.page),
+        AutoRoute(page: WayyBillRoute.page),
       ];
 }
