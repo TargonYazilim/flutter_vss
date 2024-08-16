@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
-import 'package:flutter_vss/product/service/interface/order_operation.dart';
 import 'package:flutter_vss/product/service/interface/scan_operation.dart';
 import 'package:flutter_vss/product/service/model/barcode/barcode.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
@@ -20,17 +19,13 @@ import 'package:uuid/uuid.dart';
 class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   OrderDetailViewModel({
     required CustomBarcodeScanner barcodeScanner,
-    required OrderOperation orderOperation,
     required HiveCacheOperation<Order> orderCacheOperation,
     required HiveCacheOperation<Barcode> barcodeCacheOperation,
-    required ScanOperation scanOperation,
     required Order order,
   })  : _barcodeScanner = barcodeScanner,
         _orderCacheOperation = orderCacheOperation,
-        _orderOperation = orderOperation,
         _barcodeCacheOperation = barcodeCacheOperation,
         _order = order,
-        _scanOperation = scanOperation,
         super(const OrderDetailState(isLoading: false, showButton: false));
 
   /// Hive cache operation for orders
@@ -42,8 +37,6 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
   late final CustomBarcodeScanner _barcodeScanner;
-  final OrderOperation _orderOperation;
-  final ScanOperation _scanOperation;
   late Order _order;
 
   Future<void> scanBarcode(int index) async {
@@ -116,12 +109,9 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
         );
       }
 
-      emit(
-        state.copyWith(
-          orderDetails: _order.orderDetails,
-          showButton: _hasScans(),
-        ),
-      );
+      emit(state.copyWith(orderDetails: _order.orderDetails));
+      emit(state.copyWith(showButton: _anyScans()));
+
       await _saveOrderDetailsToCache();
     } finally {
       changeOperationLoading();
@@ -132,12 +122,7 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     try {
       changeOperationLoading();
 
-      /// If has scan id then, this scan has been added to api
-      /// Remove barcode scan from api
-      final result = await _scanOperation.removeBarcodeScan(scan.scanId!);
-
-      if ((result?.errorModel == null && result?.model != null) ||
-          (_order.synchronized == false)) {
+      if (_order.synchronized == false) {
         final newOrderDetailList =
             List<OrderDetail>.from(state.orderDetails ?? []);
 
@@ -152,12 +137,8 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
           orderDetails: List<OrderDetail>.from(newOrderDetailList),
         );
 
-        emit(
-          state.copyWith(
-            orderDetails: _order.orderDetails,
-            showButton: _hasScans(),
-          ),
-        );
+        emit(state.copyWith(orderDetails: _order.orderDetails));
+        emit(state.copyWith(showButton: _anyScans()));
 
         await _saveOrderDetailsToCache();
         ProductStateItems.toastService.showSuccessMessage(
@@ -174,20 +155,7 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
 
   /// Save order details to hive cache
   Future<void> _saveOrderDetailsToCache() async {
-    final result = await _orderOperation.saveScanOrders([_order]);
-
-    /// Eğer backend'e veri başarılı bir şekilde kayıt edilmişse
-    /// [_order.copyWith(synchronized: true)]
-    /// ile veriyi synchronize olarak işaretle
-    if (result?.errorModel == null && result?.model != null) {
-      for (final siparisNo in result!.model!) {
-        if (siparisNo.siparisNumarasi == _order.siparisNumarasi) {
-          _order = _order.copyWith(synchronized: true);
-        } else {
-          _order = _order.copyWith(synchronized: false);
-        }
-      }
-    }
+    _order = _order.copyWith(synchronized: false);
     _orderCacheOperation.update(_order);
   }
 
@@ -195,12 +163,8 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   void getAllOrderDetailsFromCache() {
     final result = _orderCacheOperation.get(_order.cacheId);
 
-    emit(
-      state.copyWith(
-        orderDetails: result?.orderDetails,
-        showButton: _hasScans(),
-      ),
-    );
+    emit(state.copyWith(orderDetails: result?.orderDetails));
+    emit(state.copyWith(showButton: _anyScans()));
   }
 
   /// Show error when fetch data from db is error exists
@@ -214,18 +178,19 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     emit(state.copyWith(isLoading: !state.isLoading));
   }
 
-  bool _hasScans() {
-    if (_order.orderDetails == null) return false;
-    for (final detail in _order.orderDetails!) {
+  bool _anyScans() {
+    if (state.orderDetails == null) return false;
+    for (final detail in state.orderDetails!) {
       if (detail.scans != null && detail.scans!.isNotEmpty) {
         return true;
       }
     }
-
     return false;
   }
 
   void pushToWayybillView(BuildContext context) {
+    /// Change order details with cache order detail
+    _order.orderDetails = state.orderDetails;
     context.router.push(WayyBillRoute(order: _order));
   }
 

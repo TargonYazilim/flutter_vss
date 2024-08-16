@@ -1,7 +1,9 @@
 import 'package:flutter_vss/feature/order/wayybill/view/wayybill_view.dart';
 import 'package:flutter_vss/feature/order/wayybill/view_model/state/wayybill_base_state.dart';
 import 'package:flutter_vss/feature/order/wayybill/view_model/wayybill_view_model.dart';
+import 'package:flutter_vss/product/service/order_service.dart';
 import 'package:flutter_vss/product/service/wayy_bill_service.dart';
+import 'package:flutter_vss/product/state/container/product_state_items.dart';
 
 mixin WayybillViewMixin on WayybillBaseState<WayyBillView> {
   late WayybillViewModel _wayyBillViewModel;
@@ -15,6 +17,8 @@ mixin WayybillViewMixin on WayybillBaseState<WayyBillView> {
     _wayyBillViewModel = WayybillViewModel(
       wayyBillOperation: WayyBillService(productNetworkManager),
       order: widget.order,
+      orderCacheOperation: ProductStateItems.productCache.orderCacheModel,
+      orderOperation: OrderService(productNetworkManager),
     );
 
     _wayyBillViewModel.getWayyBill();

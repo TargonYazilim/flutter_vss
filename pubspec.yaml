@@ -42,7 +42,7 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_barcode_scanner: ^2.0.0
   json_serializable: ^6.8.0
-
+  bluetooth_print: ^4.3.0
 
   # UI
   fluttertoast: ^8.2.6
