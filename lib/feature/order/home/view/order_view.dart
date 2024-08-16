@@ -46,8 +46,8 @@ class _OrderViewState extends OrderBaseState<OrderView> with OrderViewMixin {
         onRefresh: () => viewModel.fetchOrdersFromDb(),
         isListView: true,
         child: OrderListViewSeparated(
-          onPressed: (order) =>
-              context.router.push(OrderDetailRoute(order: order)),
+          onPressed: (order, index) => context.router
+              .push(OrderDetailRoute(order: order)),
         ),
       ),
     );

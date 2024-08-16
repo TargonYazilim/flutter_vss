@@ -8,7 +8,7 @@ class OrderListViewSeparated extends StatelessWidget {
     super.key,
   });
 
-  final void Function(Order orders) onPressed;
+  final void Function(Order orders,int index) onPressed;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderViewModel, OrderState>(

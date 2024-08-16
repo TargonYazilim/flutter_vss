@@ -26,4 +26,5 @@ final class ProjectStrings {
   static const String barcodeMatched = 'Barkod tarandı';
   static const String removeBarcodeScanFiled = 'Barkod silinemedi';
   static const String removeBarcodeScanSuccess = 'Barkod silindi';
+  static const String printWaybill = 'İrsaliye Yazdır';
 }
