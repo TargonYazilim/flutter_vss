@@ -4,7 +4,8 @@ enum QueryParametersEnum {
   barkod,
   siparisNumarasi,
   malzemeKodu,
-  LOGICALREF;
+  LOGICALREF,
+  scanId;
 }
 
 //queryParameters: {'Barkod': barcode, 'SiparisNumarasi': siparisNumarasi,'malzemeKodu':malzemeKodu},

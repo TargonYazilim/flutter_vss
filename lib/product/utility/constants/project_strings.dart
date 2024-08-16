@@ -24,4 +24,6 @@ final class ProjectStrings {
       'Barkod bulunamadı!\n Senkronizasyon yapıp tekrar deneyiniz';
   static const String barcodesDoNotMatch = 'Barkodlar uyuşmuyor';
   static const String barcodeMatched = 'Barkod tarandı';
+  static const String removeBarcodeScanFiled = 'Barkod silinemedi';
+  static const String removeBarcodeScanSuccess = 'Barkod silindi';
 }

@@ -2,25 +2,15 @@ import 'package:dio_nexus/dio_nexus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_vss/product/cache/core/cache_model.dart';
 import 'package:flutter_vss/product/service/model/order/order_detail.dart';
+import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/base_listview_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'order.g.dart';
 
 @JsonSerializable()
 class Order extends IDioNexusNetworkModel<Order>
-    with EquatableMixin, BaseListviewModel<Order>, CacheModel<Order> {
-  int? id;
-  int? siparisLogicalRef;
-  String? siparisNumarasi;
-  String? siparisTarihi;
-  String? sevkiyatYeri;
-  String? sevkiyatAdresi;
-  int? cariLogicalRef;
-  String? cariKodu;
-  String? cariUnvan;
-  bool? synchronized;
-  List<OrderDetail>? orderDetails;
-
+    with EquatableMixin, BaseListviewModel<Order, Scan>, CacheModel<Order> {
   Order({
     this.id,
     this.siparisLogicalRef,
@@ -36,10 +26,21 @@ class Order extends IDioNexusNetworkModel<Order>
   });
   Order.empty();
 
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+  int? id;
+  int? siparisLogicalRef;
+  String? siparisNumarasi;
+  String? siparisTarihi;
+  String? sevkiyatYeri;
+  String? sevkiyatAdresi;
+  int? cariLogicalRef;
+  String? cariKodu;
+  String? cariUnvan;
+  bool? synchronized;
+  List<OrderDetail>? orderDetails;
+
   @override
   Order fromJson(Map<String, dynamic> json) => Order.fromJson(json);
-
-  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$OrderToJson(this);
@@ -91,4 +92,8 @@ class Order extends IDioNexusNetworkModel<Order>
 
   @override
   String get cacheId => siparisLogicalRef.toString();
+
+  @override
+  // TODO: implement subList
+  List<Scan> get subList => [];
 }

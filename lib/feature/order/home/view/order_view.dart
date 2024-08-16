@@ -7,6 +7,7 @@ import 'package:flutter_vss/feature/order/home/view_model/state/order_base_state
 import 'package:flutter_vss/feature/order/home/view_model/state/order_state.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
+import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 import 'package:flutter_vss/product/utility/constants/widget_sizes.dart';

@@ -4,7 +4,8 @@ enum ProductServicePath {
   login('$_user/Login'),
   getOrder('$_order/GetOrder'),
   getBarcodes('$_barcode/GetBarcodes'),
-  saveScanOrder('$_barcode/ScanOrderBarcode');
+  saveScanOrder('$_order/ScanOrderBarcode'),
+  removeBarcodeScan('$_scan/DeleteScan');
 
   final String value;
   const ProductServicePath(this.value);
@@ -20,4 +21,5 @@ enum ProductServicePath {
   static const String _user = 'Users/';
   static const String _order = 'Order/';
   static const String _barcode = 'Barcode/';
+  static const String _scan = 'Scan/';
 }
