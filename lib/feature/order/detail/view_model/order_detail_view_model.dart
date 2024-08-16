@@ -82,6 +82,14 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   }
 
   Future<void> updateBarcodeList(int index, String? scanResult) async {
+    if (_order.orderDetails?[index].birim == 'KG' &&
+        (_order.orderDetails != null &&
+            _order.orderDetails![index].scans != null &&
+            _order.orderDetails![index].scans!.isNotEmpty)) {
+      ProductStateItems.toastService
+          .showInfoMessage(message: ProjectStrings.barcodeLimit);
+      return;
+    }
     try {
       changeOperationLoading();
 

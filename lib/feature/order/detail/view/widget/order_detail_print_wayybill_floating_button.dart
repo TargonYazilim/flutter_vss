@@ -9,10 +9,10 @@ class OrderDetailPrintWayybillFloatingButton extends StatelessWidget {
   final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
-    return ShowFloatingButton();
+    return FloatingButtonBuilder();
   }
 
-  Widget ShowFloatingButton() {
+  Widget FloatingButtonBuilder() {
     return BlocBuilder<OrderDetailViewModel, OrderDetailState>(
       builder: (BuildContext context, state) {
         if (!state.showButton) {
