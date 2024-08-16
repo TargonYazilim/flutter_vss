@@ -5,7 +5,7 @@ class OrderDetailListviewSeparated extends StatelessWidget {
       {required this.onPressed, required this.onDelete, super.key});
 
   final void Function(int index) onPressed;
-  final void Function(Scan scan, int index,int innerIndex) onDelete;
+  final void Function(Scan scan, int index, int innerIndex) onDelete;
 
   @override
   Widget build(BuildContext context) {

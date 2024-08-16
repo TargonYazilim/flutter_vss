@@ -12,6 +12,7 @@ import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_detail.dart';
 import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
+import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 import 'package:flutter_vss/product/utility/custom_refresh_indicator.dart';
 import 'package:flutter_vss/product/utility/size/widget_size.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/product_listview_separated.dart';
@@ -19,6 +20,7 @@ import 'package:kartal/kartal.dart';
 
 part 'widget/order_detail_appbar.dart';
 part 'widget/order_detail_listview_separated.dart';
+part 'widget/order_detail_print_wayybill_floating_button.dart';
 
 @RoutePage()
 class OrderDetailView extends StatefulWidget {
@@ -40,6 +42,8 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
       create: (BuildContext context) => viewModel,
       child: OrderDetailLoading(
         parentChild: Scaffold(
+          floatingActionButton:
+              OrderDetailPrintWayybillFloatingButton(onPressed: () {}),
           appBar: OrderDetailAppbar(
             title:
                 '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
@@ -56,7 +60,8 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
       padding: const ProjectPadding.horizontalMedium() +
           const ProjectPadding.topSmall(),
       child: CustomRefreshIndicator(
-        onRefresh: () async => viewModel.getAllOrderDetailsFromCache(),
+        onRefresh: () async =>
+            viewModel.getAllOrderDetailsFromCache(),
         isListView: true,
         child: OrderDetailListviewSeparated(
           onPressed: viewModel.scanBarcode,

@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
 import 'package:flutter_vss/product/service/interface/order_operation.dart';
@@ -30,7 +29,7 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
         _barcodeCacheOperation = barcodeCacheOperation,
         _order = order,
         _scanOperation = scanOperation,
-        super(const OrderDetailState(isLoading: false));
+        super(const OrderDetailState(isLoading: false, showButton: false));
 
   /// Hive cache operation for orders
   final HiveCacheOperation<Order> _orderCacheOperation;
@@ -46,10 +45,15 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   late Order _order;
 
   Future<void> scanBarcode(int index) async {
-    final bar = Barcode(barkod: '2822404',kilo:  '210 kg', birim: 'ADET', malzemeKodu: 'T103' );
+    final bar = Barcode(
+      barkod: '2822404',
+      kilo: '210 kg',
+      birim: 'ADET',
+      malzemeKodu: 'T103',
+    );
     await updateBarcodeList(index, bar.kilo);
 
-     /*final result = await _barcodeScanner.scan(ScanMode.BARCODE);
+    /*final result = await _barcodeScanner.scan(ScanMode.BARCODE);
     if (result.scanResult != null) {
       final barcode = _barcodeCacheOperation.get('2822404');
       if (barcode == null) {
@@ -102,7 +106,12 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
         );
       }
 
-      emit(state.copyWith(orderDetails: _order.orderDetails));
+      emit(
+        state.copyWith(
+          orderDetails: _order.orderDetails,
+          showButton: _hasScans(),
+        ),
+      );
       await _saveOrderDetailsToCache();
     } finally {
       changeOperationLoading();
@@ -117,7 +126,6 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
       /// Remove barcode scan from api
       final result = await _scanOperation.removeBarcodeScan(scan.scanId!);
 
-      print(_order.synchronized);
       if ((result?.errorModel == null && result?.model != null) ||
           (_order.synchronized == false)) {
         final newOrderDetailList =
@@ -134,7 +142,12 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
           orderDetails: List<OrderDetail>.from(newOrderDetailList),
         );
 
-        emit(state.copyWith(orderDetails: _order.orderDetails));
+        emit(
+          state.copyWith(
+            orderDetails: _order.orderDetails,
+            showButton: _hasScans(),
+          ),
+        );
 
         await _saveOrderDetailsToCache();
         ProductStateItems.toastService.showSuccessMessage(
@@ -171,7 +184,13 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   /// Get Orders from cache
   void getAllOrderDetailsFromCache() {
     final result = _orderCacheOperation.get(_order.cacheId);
-    emit(state.copyWith(orderDetails: result?.orderDetails));
+
+    emit(
+      state.copyWith(
+        orderDetails: result?.orderDetails,
+        showButton: _hasScans(),
+      ),
+    );
   }
 
   /// Show error when fetch data from db is error exists
@@ -183,6 +202,17 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   /// Change loading state
   void changeLoading() {
     emit(state.copyWith(isLoading: !state.isLoading));
+  }
+
+  bool _hasScans() {
+    if (_order.orderDetails == null) return false;
+    for (final detail in _order.orderDetails!) {
+      if (detail.scans != null && detail.scans!.isNotEmpty) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /// Operation loading
