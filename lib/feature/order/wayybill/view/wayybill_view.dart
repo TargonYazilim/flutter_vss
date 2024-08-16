@@ -42,7 +42,9 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
       child: WayybillLoading(
         parentChild: Scaffold(
           floatingActionButton: PrintWayybillFloatingButton(
-            onPressed: () {},
+            onPressed: () async {
+              await viewModel.saveOrdersToService();
+            },
           ),
           appBar: WayyBillAppbar(
             title:

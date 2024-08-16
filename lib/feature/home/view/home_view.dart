@@ -23,12 +23,18 @@ class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.router.push(const PrinterRoute());
+        },
+      ),
       resizeToAvoidBottomInset: false,
       appBar: const HomeAppbar(),
       backgroundColor: context.general.appTheme.colorScheme.surface,
       body: Padding(
         padding: const ProjectPadding.horizontalMedium(),
         child: _body(context),
+        //child: _body(context),
       ),
     );
   }
