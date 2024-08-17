@@ -46,12 +46,44 @@ final class SplashViewModel extends Cubit<SplashState> {
   /// Get orders from API
   Future<void> getOrdersFromDb(String? userId) async {
     if (userId != null) {
+      /// Get orders from api
       final result = await _orderOperation.getOrder(int.parse(userId));
 
+      /// Get Orders from cache
+      final ordersFromCache = _orderCacheOperation.getAll();
+
       final orders = result?.model?.orders ?? [];
+
       if (orders.isNotEmpty) {
-        _saveOrdersToCache(orders);
+        for (final order in orders) {
+          if (order.orderDetails != null && order.orderDetails!.isNotEmpty) {
+            for (final orderFromCache in ordersFromCache) {
+              if ((order.siparisLogicalRef != null &&
+                      orderFromCache.siparisLogicalRef != null &&
+                      order.siparisLogicalRef ==
+                          orderFromCache.siparisLogicalRef) &&
+                  order.orderDetails != null &&
+                  order.orderDetails!.isNotEmpty &&
+                  orderFromCache.orderDetails != null &&
+                  orderFromCache.orderDetails!.isNotEmpty) {
+                for (final orderDetail in order.orderDetails!) {
+                  for (final orderCacheDetail in orderFromCache.orderDetails!) {
+                    if ((orderDetail.siparisId != null &&
+                            orderCacheDetail.siparisId != null &&
+                            orderDetail.siparisId ==
+                                orderCacheDetail.siparisId) &&
+                        orderCacheDetail.scans != null &&
+                        orderCacheDetail.scans!.isNotEmpty) {
+                      orderDetail.scans = orderCacheDetail.scans;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
+      _saveOrdersToCache(orders);
     }
   }
 
