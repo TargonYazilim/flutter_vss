@@ -21,6 +21,7 @@ final class ToastManager extends ToastService {
   }
 
   void _showToast({required String message, required Color color}) {
+    Fluttertoast.cancel();
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_LONG,

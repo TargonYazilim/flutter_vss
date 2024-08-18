@@ -13,6 +13,7 @@ import 'package:flutter_vss/product/state/base/base_cubit.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/barcode/custom_barcode_scanner.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
+import 'package:flutter_vss/product/widget/dialog/question_dialog.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
@@ -117,7 +118,13 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     }
   }
 
-  Future<void> deleteScanBarcode(Scan scan, int index, int innerIndex) async {
+  Future<void> deleteScanBarcode(
+      BuildContext context, Scan scan, int index, int innerIndex) async {
+    final result = await QuestionDialog.show(
+      context: context,
+      title: ProjectStrings.areYouSureForDeleteScan,
+    );
+    if (!(result ?? false)) return;
     try {
       changeOperationLoading();
 
