@@ -45,7 +45,6 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
   /// Save order details to hive cache
   Future<void> saveOrdersToService() async {
     final result = await _orderOperation.saveScanOrders([_order]);
-    print(result);
 
     /// Eğer backend'e veri başarılı bir şekilde kayıt edilmişse
     /// [_order.copyWith(synchronized: true)]
