@@ -66,7 +66,8 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
         isListView: true,
         child: OrderDetailListviewSeparated(
           onPressed: viewModel.scanBarcode,
-          onDelete: viewModel.deleteScanBarcode,
+          onDelete: (scan, index, innerIndex) =>
+              viewModel.deleteScanBarcode(context, scan, index, innerIndex),
         ),
       ),
     );

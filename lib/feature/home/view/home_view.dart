@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vss/feature/home/view/widget/drawer_menu/drawer_items.dart';
 import 'package:flutter_vss/feature/home/view_model/home_view_model.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 import 'package:flutter_vss/product/utility/size/widget_size.dart';
 import 'package:kartal/kartal.dart';
 
+part 'widget/drawer_menu/home_drawer_menu.dart';
 part 'widget/home_appbar.dart';
 part 'widget/home_card_button.dart';
 
@@ -23,6 +25,7 @@ class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const HomeDrawerMenu(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.router.push(const PrinterRoute());
@@ -30,7 +33,6 @@ class _HomeViewState extends HomeViewModel {
       ),
       resizeToAvoidBottomInset: false,
       appBar: const HomeAppbar(),
-      backgroundColor: context.general.appTheme.colorScheme.surface,
       body: Padding(
         padding: const ProjectPadding.horizontalMedium(),
         child: _body(context),
@@ -60,11 +62,6 @@ class _HomeViewState extends HomeViewModel {
               ),
             ),
           ],
-        ),
-        const SizedBox(height: WidgetSizes.spacingXxl9),
-        TextButton(
-          onPressed: () async => logOut(),
-          child: const Text(ProjectStrings.logOut),
         ),
         const Spacer(),
         const Text('Vibe'),
