@@ -13,6 +13,7 @@ import 'package:flutter_vss/product/state/base/base_cubit.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/barcode/custom_barcode_scanner.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
+import 'package:flutter_vss/product/widget/dialog/input_dialog.dart';
 import 'package:flutter_vss/product/widget/dialog/question_dialog.dart';
 import 'package:uuid/uuid.dart';
 
@@ -44,12 +45,12 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   }
 
   Future<void> scanBarcodeManuel(BuildContext context, int index) async {
-    await _barcodeControl('123132822404222', index);
     if (!context.mounted) return;
-    await QuestionDialog.show(
-      context: context,
-      title: ProjectStrings.areYouSureForLogout,
-    );
+    final result = await InputDialog.show(
+        context: context, title: ProjectStrings.addBarcode);
+    if (result != null) {
+      await _barcodeControl(result.response, index);
+    }
   }
 
   Future<void> _barcodeControl(String barcode, int index) async {

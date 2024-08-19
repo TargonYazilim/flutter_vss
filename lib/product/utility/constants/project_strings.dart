@@ -41,4 +41,6 @@ final class ProjectStrings {
       'Çok fazla istek gönderiyorsunuz!.\n Lütfen bekleyin';
   static const String areYouSureForDeleteScan =
       'Taramayı silmek istediğinize emin misiniz?';
+  static const String addBarcode =
+      'Barkod giriniz';
 }
