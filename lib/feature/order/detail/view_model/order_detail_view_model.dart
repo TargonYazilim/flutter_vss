@@ -40,8 +40,21 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   late Order _order;
 
   Future<void> scanBarcode(int index) async {
+    await _barcodeControl('2822404', index);
+  }
+
+  Future<void> scanBarcodeManuel(BuildContext context, int index) async {
+    await _barcodeControl('123132822404222', index);
+    if (!context.mounted) return;
+    await QuestionDialog.show(
+      context: context,
+      title: ProjectStrings.areYouSureForLogout,
+    );
+  }
+
+  Future<void> _barcodeControl(String barcode, int index) async {
     final bar = Barcode(
-      barkod: '2822404',
+      barkod: barcode,
       kilo: '210 kg',
       birim: 'ADET',
       malzemeKodu: 'T103',
@@ -119,7 +132,11 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   }
 
   Future<void> deleteScanBarcode(
-      BuildContext context, Scan scan, int index, int innerIndex) async {
+    BuildContext context,
+    Scan scan,
+    int index,
+    int innerIndex,
+  ) async {
     final result = await QuestionDialog.show(
       context: context,
       title: ProjectStrings.areYouSureForDeleteScan,

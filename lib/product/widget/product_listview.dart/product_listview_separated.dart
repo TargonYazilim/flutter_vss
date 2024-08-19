@@ -15,16 +15,15 @@ class ProductListviewSeparated<T extends BaseListviewModel<T, R>,
     this.onPressed,
     this.onDelete,
     super.key,
-    this.trailing,
-    this.trailingOnPressed,
+    this.trailingBuilder,
     this.showScans = false,
   });
 
   final List<T> items;
   final void Function(T item, int index)? onPressed;
-  final void Function(T item, int index)? trailingOnPressed;
+  final Widget Function(BuildContext context, T item, int index)?
+      trailingBuilder;
   final void Function(R item, int index, int innerIndex)? onDelete;
-  final Widget? trailing;
   final bool? showScans;
 
   @override
@@ -43,19 +42,24 @@ class ProductListviewSeparated<T extends BaseListviewModel<T, R>,
                   leading: LeadingDecoration(
                     child: Text(
                       items[index].title.substring(0, 1),
-                      style: context.general.appTheme.textTheme.titleMedium,
+                      style: context.general.appTheme.textTheme.titleMedium
+                          ?.copyWith(
+                        color: context.general.appTheme.colorScheme.surface,
+                      ),
                     ),
                   ),
                   title: Text(
                     items[index].title,
                     style: context.general.appTheme.textTheme.titleMedium,
                   ),
-                  trailing: trailing != null
-                      ? InkWell(
-                          onTap: () =>
-                              trailingOnPressed?.call(items[index], index),
-                          child: trailing,
+                  subtitle: items[index].subTitle != null
+                      ? Text(
+                          items[index].subTitle!,
+                          style: context.general.appTheme.textTheme.titleMedium,
                         )
+                      : null,
+                  trailing: trailingBuilder != null
+                      ? trailingBuilder!(context, items[index], index)
                       : const SizedBox.shrink(),
                 ),
                 if (showScans ?? false)

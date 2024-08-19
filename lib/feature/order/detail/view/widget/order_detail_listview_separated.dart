@@ -1,10 +1,15 @@
 part of '../order_detail_view.dart';
 
 class OrderDetailListviewSeparated extends StatelessWidget {
-  const OrderDetailListviewSeparated(
-      {required this.onPressed, required this.onDelete, super.key});
+  const OrderDetailListviewSeparated({
+    required this.onPressedBarcode,
+    required this.onPressedManuel,
+    required this.onDelete,
+    super.key,
+  });
 
-  final void Function(int index) onPressed;
+  final void Function(int index) onPressedBarcode;
+  final void Function(int index) onPressedManuel;
   final void Function(Scan scan, int index, int innerIndex) onDelete;
 
   @override
@@ -14,16 +19,28 @@ class OrderDetailListviewSeparated extends StatelessWidget {
         return ProductListviewSeparated<OrderDetail, Scan>(
           showScans: true,
           items: state.orderDetails ?? [],
-          trailingOnPressed: (item, index) => onPressed.call(index),
           onDelete: onDelete.call,
-          trailing: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: const Padding(
-              padding: ProjectPadding.allSmall(),
-              child: Icon(Icons.qr_code_scanner_rounded),
-            ),
+          trailingBuilder: (context, item, index) => Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () => onPressedBarcode.call(index),
+                child: ProductListviewIconDecoration(
+                  child: ProjectIcons.iconBarcode.toWidget(
+                    color: context.general.appTheme.colorScheme.primary,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () => onPressedManuel.call(index),
+                child: ProductListviewIconDecoration(
+                  child: Icon(
+                    Icons.edit,
+                    color: context.general.appTheme.colorScheme.primary,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

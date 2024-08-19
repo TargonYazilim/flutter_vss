@@ -11,6 +11,7 @@ import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/service/model/order/order_detail.dart';
 import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
+import 'package:flutter_vss/product/utility/constants/project_icons.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 import 'package:flutter_vss/product/utility/custom_refresh_indicator.dart';
 import 'package:flutter_vss/product/utility/modal_barrier/custom_modal_barrier.dart';
@@ -22,6 +23,7 @@ part 'widget/order_detail_appbar.dart';
 part 'widget/order_detail_listview_separated.dart';
 part 'widget/order_detail_loading.dart';
 part 'widget/order_detail_print_wayybill_floating_button.dart';
+part 'widget/decoration/product_listview_icon_decoration.dart';
 
 @RoutePage()
 class OrderDetailView extends StatefulWidget {
@@ -65,9 +67,11 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
         onRefresh: () async => viewModel.getAllOrderDetailsFromCache(),
         isListView: true,
         child: OrderDetailListviewSeparated(
-          onPressed: viewModel.scanBarcode,
+          onPressedBarcode: viewModel.scanBarcode,
           onDelete: (scan, index, innerIndex) =>
               viewModel.deleteScanBarcode(context, scan, index, innerIndex),
+          onPressedManuel: (index) =>
+              viewModel.scanBarcodeManuel(context, index),
         ),
       ),
     );
