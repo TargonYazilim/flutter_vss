@@ -94,6 +94,8 @@ class Order extends IDioNexusNetworkModel<Order>
   String get cacheId => siparisLogicalRef.toString();
 
   @override
-  // TODO: implement subList
   List<Scan> get subList => [];
+  
+  @override
+  String? get subTitle => null;
 }

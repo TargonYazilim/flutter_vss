@@ -46,6 +46,7 @@ dependencies:
 
   # UI
   fluttertoast: ^8.2.6
+  flutter_svg: ^2.0.10+1
 
   # Navigation
   auto_route: ^8.3.0
@@ -64,6 +65,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/icons/
     - assets/images/
     - assets/env/
 

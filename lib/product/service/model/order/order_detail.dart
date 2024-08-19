@@ -65,7 +65,10 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
   }
 
   @override
-  String get title => '$malzemeAdi - $miktar $birim';
+  String get title => '$malzemeAdi';
+
+  @override
+  String? get subTitle => '$miktar $birim';
 
   @override
   String get cacheId => siparisId.toString();
