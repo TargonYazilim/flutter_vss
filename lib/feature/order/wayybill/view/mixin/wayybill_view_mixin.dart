@@ -17,10 +17,13 @@ mixin WayybillViewMixin on WayybillBaseState<WayyBillView> {
     _wayyBillViewModel = WayybillViewModel(
       wayyBillOperation: WayyBillService(productNetworkManager),
       order: widget.order,
-      orderCacheOperation: ProductStateItems.productCache.orderCacheModel,
+      orderCacheOperation: productCache.orderCacheModel,
       orderOperation: OrderService(productNetworkManager),
+      loginResponseCacheOperation: productCache.loginResponseCacheModel,
+      sharedCacheOperation: ProductStateItems.productSharedCache,
     );
 
-    _wayyBillViewModel.getWayyBill();
+    _wayyBillViewModel..getWayyBill()
+    ..getAddressInfo();
   }
 }
