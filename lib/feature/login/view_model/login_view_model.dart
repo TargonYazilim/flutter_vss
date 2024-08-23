@@ -44,8 +44,11 @@ final class LoginViewModel extends Cubit<LoginState> {
           macaddress: deviceUniqueId,
         ),
       );
+
       if (result?.model?.error == '1') {
         _showError(result?.model?.result);
+      } else if (result?.errorModel != null) {
+        _showError(result?.errorModel?.errorMessage);
       } else {
         await _saveUserId(result?.model?.id.toString());
         return _saveItems(result?.model);
