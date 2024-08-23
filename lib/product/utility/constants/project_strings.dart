@@ -41,6 +41,11 @@ final class ProjectStrings {
       'Çok fazla istek gönderiyorsunuz!.\n Lütfen bekleyin';
   static const String areYouSureForDeleteScan =
       'Taramayı silmek istediğinize emin misiniz?';
-  static const String addBarcode =
-      'Barkod giriniz';
+  static const String addBarcode = 'Barkod giriniz';
+  static const String baseUrlHint = 'Sunucu Adresi (IP)';
+  static const String companyNoHint = 'Firma numarası';
+  static const String baseUrlEmptyError = 'Sunucu Adresi (IP) giriniz';
+  static const String companyNoEmptyError = 'Firma numarası giriniz';
+  static const String save = 'Kaydet';
+  static const String noAddressDetail = 'Adres bilgisi yok!';
 }

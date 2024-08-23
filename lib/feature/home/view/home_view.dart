@@ -27,10 +27,7 @@ class _HomeViewState extends HomeViewModel {
     return Scaffold(
       drawer: const HomeDrawerMenu(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.router.push(const PrinterRoute());
-        },
-      ),
+          onPressed: () => context.router.push(const PrinterRoute())),
       resizeToAvoidBottomInset: false,
       appBar: const HomeAppbar(),
       body: Padding(
