@@ -27,6 +27,7 @@ class OrderView extends StatefulWidget {
 }
 
 class _OrderViewState extends OrderBaseState<OrderView> with OrderViewMixin {
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
