@@ -26,9 +26,7 @@ class OrderDetailListviewSeparated extends StatelessWidget {
               InkWell(
                 onTap: () => onPressedBarcode.call(index),
                 child: ProductListviewIconDecoration(
-                  child: ProjectIcons.iconBarcode.toWidget(
-                    color: context.general.appTheme.colorScheme.primary,
-                  ),
+                  child: ProjectIcons.iconBarcode.toWidget(),
                 ),
               ),
               InkWell(

@@ -19,4 +19,16 @@ class ValidatorItems {
         ? null
         : ProjectStrings.passwordEmptyError;
   }
+
+  String? get validateBaseUrl {
+    return text.ext.isNotNullOrNoEmpty
+        ? null
+        : ProjectStrings.baseUrlEmptyError;
+  }
+
+  String? get validateCompanyNo {
+    return text.ext.isNotNullOrNoEmpty
+        ? null
+        : ProjectStrings.companyNoEmptyError;
+  }
 }

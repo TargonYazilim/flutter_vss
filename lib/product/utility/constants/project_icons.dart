@@ -7,7 +7,11 @@ enum ProjectIcons {
   final String value;
   const ProjectIcons(this.value);
 
-  Widget toWidget({double? height, double? width, Color? color}) {
+  
+}
+
+extension ProjectIconsExtension on ProjectIcons {
+ Widget toWidget({double? height, double? width, Color? color}) {
     return SvgPicture.asset(
       _path,
       height: height,

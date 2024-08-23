@@ -3,7 +3,12 @@
 part of '../settings_view.dart';
 
 class SettingsAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const SettingsAppbar({super.key});
+  const SettingsAppbar({
+    required this.valueListenable,
+    super.key,
+  });
+
+  final ValueListenable<bool> valueListenable;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,25 @@ class SettingsAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       //backgroundColor: context.general.appTheme.colorScheme.primary,
+      actions: [
+        Loading(),
+      ],
+    );
+  }
+
+  Widget Loading() {
+    return ValueListenableBuilder<bool>(
+      builder: (context, value, child) {
+        return const Padding(
+          padding: ProjectPadding.rightSmall(),
+          child: SizedBox(
+            height: WidgetSizes.spacingXl,
+            width: WidgetSizes.spacingXl,
+            child: CircularProgressIndicator(),
+          ),
+        ).ext.toVisible(value: value);
+      },
+      valueListenable: valueListenable,
     );
   }
 
