@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_vss/product/cache/core/cache_model.dart';
 import 'package:flutter_vss/product/service/model/order/scan.dart';
 import 'package:flutter_vss/product/widget/product_listview.dart/base_listview_model.dart';
+import 'package:flutter_vss/product/widget/product_listview.dart/base_summary_listview_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'order_detail.g.dart';
@@ -12,7 +13,8 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
     with
         EquatableMixin,
         BaseListviewModel<OrderDetail, Scan>,
-        CacheModel<OrderDetail> {
+        CacheModel<OrderDetail>,
+        BaseSummaryListviewModel<OrderDetail> {
   OrderDetail({
     this.id,
     this.malzemeKodu,
@@ -75,4 +77,22 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
 
   @override
   List<Scan> get subList => scans ?? [];
+
+  double _totalPrice = 0;
+
+  @override
+  String get summaryTitle {
+    _totalPrice = 0;
+    if (scans?.isNotEmpty ?? false) {
+      for (final scan in scans!) {
+        if (scan.result != null) {
+          final price = double.parse(
+            scan.result!.trim().toLowerCase().replaceAll('kg', ''),
+          );
+          _totalPrice = _totalPrice + price;
+        }
+      }
+    }
+    return '$title - ${scans?.length ?? 0} $birim - $_totalPrice KG';
+  }
 }

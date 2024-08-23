@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CheckOrdersRoute.name: (routeData) {
+      final args = routeData.argsAs<CheckOrdersRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CheckOrdersView(
+          order: args.order,
+          key: args.key,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -72,6 +82,44 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [CheckOrdersView]
+class CheckOrdersRoute extends PageRouteInfo<CheckOrdersRouteArgs> {
+  CheckOrdersRoute({
+    required Order order,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CheckOrdersRoute.name,
+          args: CheckOrdersRouteArgs(
+            order: order,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CheckOrdersRoute';
+
+  static const PageInfo<CheckOrdersRouteArgs> page =
+      PageInfo<CheckOrdersRouteArgs>(name);
+}
+
+class CheckOrdersRouteArgs {
+  const CheckOrdersRouteArgs({
+    required this.order,
+    this.key,
+  });
+
+  final Order order;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CheckOrdersRouteArgs{order: $order, key: $key}';
+  }
 }
 
 /// generated route for
