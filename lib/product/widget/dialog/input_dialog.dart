@@ -22,7 +22,7 @@ class InputDialog extends StatefulWidget {
 
   /// Show the dialog for question
   /// This will always return [QuestionAnswer]
-  static Future<QuestionAnswer?> show({
+  static Future<QuestionAnswer?>  show({
     required BuildContext context,
     required String title,
   }) async {
