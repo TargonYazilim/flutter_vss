@@ -66,9 +66,8 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomText(text: 'Vibe Bilişim Dan. ve Tic'),
-              const CustomText(text: 'Selvili Sk. No:6 Ataşehir'),
-              const CustomText(text: 'Ataşehir V.D: 509123839'),
+              CustomText(
+                  text: state.addressInfo ?? ProjectStrings.noAddressDetail),
               const SizedBox(height: WidgetSizes.spacingM),
               CustomText(text: state.wayyBill?.baslik?.cariUnvan ?? '-'),
               CustomText(text: state.wayyBill?.baslik?.cariAdresi ?? '-'),
@@ -76,6 +75,7 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
                 text:
                     '${state.wayyBill?.baslik?.cariVergiDairesi} ${state.wayyBill?.baslik?.cariVKN}',
               ),
+              const SizedBox(height: WidgetSizes.spacingM),
               const SizedBox(height: WidgetSizes.spacingM),
               const CustomText(text: 'Teslimat adresi: Migros Ataşehir'),
               const SizedBox(height: WidgetSizes.spacingXl),

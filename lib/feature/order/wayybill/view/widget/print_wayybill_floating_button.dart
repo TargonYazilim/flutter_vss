@@ -10,13 +10,15 @@ class PrintWayybillFloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
+      backgroundColor: context.general.appTheme.colorScheme.primary,
+      foregroundColor: Colors.white,
       onPressed: onPressed,
       label: Text(
         ProjectStrings.printWaybill,
         style: context.general.textTheme.titleMedium
-            ?.copyWith(fontWeight: FontWeight.w500),
+            ?.copyWith(fontWeight: FontWeight.w500, color: Colors.white),
       ),
-      icon: const Icon(Icons.print_rounded),
+      icon: const Icon(Icons.print_rounded, color: Colors.white),
     );
   }
 }
