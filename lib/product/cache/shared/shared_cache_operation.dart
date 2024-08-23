@@ -13,6 +13,13 @@ final class SharedCacheOperation {
     await _prefs.clear();
   }
 
+  /// Clear by [SharedKeys]
+  Future<void> clearByKeys(List<SharedKeys> keys) async {
+    for (final key in keys) {
+      await _prefs.remove(key.toString());
+    }
+  }
+
   /// Add data to [SharedPreferences]
   /// [SharedKeys] is key. When you add or get data, you can use only [SharedKeys]
   Future<void> add(SharedKeys key, Object value) async => _saveData(key, value);

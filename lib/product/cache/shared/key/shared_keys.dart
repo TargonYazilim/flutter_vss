@@ -1,1 +1,1 @@
-enum SharedKeys { userId }
+enum SharedKeys { userId, baseUrl, companyNo }
