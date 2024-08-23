@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vss/product/cache/shared/key/shared_keys.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
 import 'package:flutter_vss/product/utility/constants/project_durations.dart';
@@ -78,13 +79,14 @@ class DrawerMenuItems {
       title: ProjectStrings.areYouSureForLogout,
     );
     if (!(result ?? false)) return;
+
     /// Synchronize before logout
     await ProductStateItems.synchronizeCache.synchronizeOrders();
 
     /// Clear all cache datas
     await ProductStateItems.productCache.loginResponseCacheModel.clear();
     await ProductStateItems.productCache.orderCacheModel.clear();
-    await ProductStateItems.productSharedCache.clear();
+    await ProductStateItems.productSharedCache.clearByKeys([SharedKeys.userId]);
     if (!context.mounted) return;
     unawaited(context.router.replace(const SplashRoute()));
   }
