@@ -22,7 +22,7 @@ import 'package:kartal/kartal.dart';
 part 'widget/order_detail_appbar.dart';
 part 'widget/order_detail_listview_separated.dart';
 part 'widget/order_detail_loading.dart';
-part 'widget/order_detail_print_wayybill_floating_button.dart';
+part 'widget/check_orders_navigate_button.dart';
 part 'widget/decoration/product_listview_icon_decoration.dart';
 
 @RoutePage()
@@ -45,8 +45,8 @@ class _OrderDetailViewState extends OrderDetailBaseState<OrderDetailView>
       create: (BuildContext context) => viewModel,
       child: OrderDetailLoading(
         parentChild: Scaffold(
-          floatingActionButton: OrderDetailPrintWayybillFloatingButton(
-            onPressed: () => viewModel.pushToWayybillView(context),
+          floatingActionButton: CheckOrdersNavigateButton(
+            onPressed: () => viewModel.pushToCheckOrdersView(context),
           ),
           appBar: OrderDetailAppbar(
             title:

@@ -212,10 +212,10 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     return false;
   }
 
-  void pushToWayybillView(BuildContext context) {
+  void pushToCheckOrdersView(BuildContext context) {
     /// Change order details with cache order detail
     _order.orderDetails = state.orderDetails;
-    context.router.push(WayyBillRoute(order: _order));
+    context.router.push(CheckOrdersRoute(order: _order));
   }
 
   /// Operation loading

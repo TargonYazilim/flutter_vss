@@ -30,6 +30,8 @@ final class ProjectStrings {
   static const String removeBarcodeScanFiled = 'Barkod silinemedi';
   static const String removeBarcodeScanSuccess = 'Barkod silindi';
   static const String printWaybill = 'İrsaliye Yazdır';
+  static const String showWaybill = 'İrsaliyeyi göster';
+    static const String checkAndPrintWaybill = 'Kontrol et ve yazdır';
   static const String barcodeLimit = 'Daha fazla barkod okutamazsınız';
   static const String somethingError = 'Bir hata oluştu';
   static const String deliveredBy = 'Teslim Eden';
@@ -48,4 +50,5 @@ final class ProjectStrings {
   static const String companyNoEmptyError = 'Firma numarası giriniz';
   static const String save = 'Kaydet';
   static const String noAddressDetail = 'Adres bilgisi yok!';
+  static const String ordersCheckAppBarTitle = 'Sipariş özeti';
 }

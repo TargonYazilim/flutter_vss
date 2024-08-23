@@ -1,10 +1,11 @@
 part of '../order_detail_view.dart';
 
-class OrderDetailPrintWayybillFloatingButton extends StatelessWidget {
-  const OrderDetailPrintWayybillFloatingButton({
+class CheckOrdersNavigateButton extends StatelessWidget {
+  const CheckOrdersNavigateButton({
     required this.onPressed,
     super.key,
   });
+
 
   final void Function() onPressed;
   @override
@@ -23,11 +24,10 @@ class OrderDetailPrintWayybillFloatingButton extends StatelessWidget {
           foregroundColor: Colors.white,
           onPressed: onPressed,
           label: Text(
-            ProjectStrings.printWaybill,
+            ProjectStrings.checkAndPrintWaybill,
             style: context.general.textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.w500,color: Colors.white),
+                ?.copyWith(fontWeight: FontWeight.w500, color: Colors.white),
           ),
-          icon: const Icon(Icons.print_rounded,color: Colors.white),
         );
       },
     );
