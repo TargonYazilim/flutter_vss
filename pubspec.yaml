@@ -22,6 +22,7 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.1.0
   shared_preferences: ^2.2.3
+  permission_handler: ^11.3.1
 
   # Gen
   envied: ^0.5.4+1
@@ -42,7 +43,7 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_barcode_scanner: ^2.0.0
   json_serializable: ^6.8.0
-  bluetooth_print: ^4.3.0
+  blue_thermal_printer: ^1.2.3
 
   # UI
   fluttertoast: ^8.2.6

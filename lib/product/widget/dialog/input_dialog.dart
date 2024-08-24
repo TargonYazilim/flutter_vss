@@ -64,7 +64,8 @@ class _InputDialogState extends State<InputDialog> {
           ),
           onPressed: () {
             if (_response.isEmpty) {
-              Navigator.of(context).pop();
+              //TODO: null check
+              Navigator.of(context).pop(null);
             } else {
               Navigator.of(context).pop(QuestionAnswer(response: _response));
             }

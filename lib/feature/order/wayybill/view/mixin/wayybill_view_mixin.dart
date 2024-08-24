@@ -20,10 +20,26 @@ mixin WayybillViewMixin on WayybillBaseState<WayyBillView> {
       orderCacheOperation: productCache.orderCacheModel,
       orderOperation: OrderService(productNetworkManager),
       loginResponseCacheOperation: productCache.loginResponseCacheModel,
-      sharedCacheOperation: ProductStateItems.productSharedCache,
+      sharedCacheOperation: productSharedCache,
+      bluetoothOperation: bluetoothOperation,
     );
 
-    _wayyBillViewModel..getWayyBill()
-    ..getAddressInfo();
+    _wayyBillViewModel
+      ..getWayyBill()
+      ..getAddressInfo()
+      ..tryToBluetoothConnect(context);
+
+    bluetoothOperation.listenConnection(
+      (result) {
+        ProductStateItems.toastService.showInfoMessage(message: result.value);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    bluetoothOperation.stopListen();
   }
 }

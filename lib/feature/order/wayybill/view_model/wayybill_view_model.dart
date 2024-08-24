@@ -1,3 +1,5 @@
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_vss/feature/order/wayybill/view_model/state/wayybill_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
 import 'package:flutter_vss/product/cache/shared/key/shared_keys.dart';
@@ -8,7 +10,9 @@ import 'package:flutter_vss/product/service/model/login/login_response.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/state/base/base_cubit.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
+import 'package:flutter_vss/product/utility/bluetooth/interface/i_bluetooth_printer_operation.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
+import 'package:flutter_vss/product/widget/bottom_sheet/bluetooth_bottom_sheet/view/bluetooth_bottom_sheet.dart';
 
 class WayybillViewModel extends BaseCubit<WayybillState> {
   WayybillViewModel({
@@ -18,11 +22,13 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
     required HiveCacheOperation<Order> orderCacheOperation,
     required HiveCacheOperation<LoginResponse> loginResponseCacheOperation,
     required SharedCacheOperation sharedCacheOperation,
+    required IBluetoothPrinterOperation bluetoothOperation,
   })  : _wayyBillOperation = wayyBillOperation,
         _orderCacheOperation = orderCacheOperation,
         _loginResponseCacheOperation = loginResponseCacheOperation,
         _orderOperation = orderOperation,
         _sharedCacheOperation = sharedCacheOperation,
+        _bluetoothOperation = bluetoothOperation,
         _order = order,
         super(const WayybillState(isLoading: false));
 
@@ -32,11 +38,56 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
   /// Hive cache operation for login response
   final HiveCacheOperation<LoginResponse> _loginResponseCacheOperation;
 
+  /// Shared pref operation
   final SharedCacheOperation _sharedCacheOperation;
+
+  /// Bluetooth operations
+  final IBluetoothPrinterOperation _bluetoothOperation;
 
   final OrderOperation _orderOperation;
   final WayyBillOperation _wayyBillOperation;
   Order _order;
+
+  Future<bool> tryToBluetoothConnect(BuildContext context,
+      {bool isManuel = false}) async {
+    if (await _bluetoothOperation.isConnected() && !isManuel) {
+      ProductStateItems.toastService
+          .showSuccessMessage(message: ProjectStrings.bluetoothConnected);
+      return true;
+    } else {
+      if (!context.mounted) return false;
+
+      /// Get selected device from shared cache
+      var device = getBluetoothDevice();
+
+      /// Connect with manuel
+      final manuelSelect = await BluetoothBottomSheet.show(context: context);
+      if (manuelSelect != null) device = manuelSelect;
+      final response = await _bluetoothOperation.connect(device);
+      if (response) {
+        await saveBluetoothDevice(device);
+        ProductStateItems.toastService
+            .showSuccessMessage(message: ProjectStrings.bluetoothConnected);
+      } else {
+        ProductStateItems.toastService
+            .showErrorMessage(message: ProjectStrings.bluetoothConnectFailed);
+      }
+    }
+    return false;
+  }
+
+  Future<void> printWaybill(BuildContext context) async {
+    try {
+      changeLoading();
+
+      final result = await tryToBluetoothConnect(context);
+      if (result) {
+        //await saveOrdersToService();
+      }
+    } finally {
+      changeLoading();
+    }
+  }
 
   Future<void> getWayyBill() async {
     try {
@@ -92,5 +143,26 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
   /// Change loading state
   void changeLoading() {
     emit(state.copyWith(isLoading: !state.isLoading));
+  }
+
+  Future<void> saveBluetoothDevice(BluetoothDevice? device) async {
+    if (device == null) return;
+    final deviceInfo = '${device.name}|${device.address}';
+    await _sharedCacheOperation.add(SharedKeys.bluetoothDevice, deviceInfo);
+  }
+
+  BluetoothDevice? getBluetoothDevice() {
+    final deviceInfo =
+        _sharedCacheOperation.get<String>(SharedKeys.bluetoothDevice);
+
+    if (deviceInfo != null) {
+      final parts = deviceInfo.split('|');
+      if (parts.length == 2) {
+        final name = parts[0];
+        final address = parts[1];
+        return BluetoothDevice(name, address);
+      }
+    }
+    return null;
   }
 }

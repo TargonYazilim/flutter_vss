@@ -53,12 +53,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OrderView(),
       );
     },
-    PrinterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PrinterView(),
-      );
-    },
     SettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -198,20 +192,6 @@ class OrderRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OrderRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [PrinterView]
-class PrinterRoute extends PageRouteInfo<void> {
-  const PrinterRoute({List<PageRouteInfo>? children})
-      : super(
-          PrinterRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'PrinterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -16,7 +16,7 @@ import 'package:kartal/kartal.dart';
 
 part 'widget/custom_text.dart';
 part 'widget/delivared_recipient.dart';
-part 'widget/print_wayybill_floating_button.dart';
+part 'widget/waybill_floating_buttons.dart';
 part 'widget/scans_column.dart';
 part 'widget/wayybill_appbar.dart';
 part 'widget/wayybill_loading.dart';
@@ -39,20 +39,7 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => viewModel,
-      child: WayybillLoading(
-        parentChild: Scaffold(
-          floatingActionButton: PrintWayybillFloatingButton(
-            onPressed: () async {
-              await viewModel.saveOrdersToService();
-            },
-          ),
-          appBar: WayyBillAppbar(
-            title:
-                '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
-          ),
-          body: _body(),
-        ),
-      ),
+      child: _floatinButtons(context),
     );
   }
 
@@ -67,7 +54,8 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                  text: state.addressInfo ?? ProjectStrings.noAddressDetail),
+                text: state.addressInfo ?? ProjectStrings.noAddressDetail,
+              ),
               const SizedBox(height: WidgetSizes.spacingM),
               CustomText(text: state.wayyBill?.baslik?.cariUnvan ?? '-'),
               CustomText(text: state.wayyBill?.baslik?.cariAdresi ?? '-'),
@@ -75,8 +63,7 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
                 text:
                     '${state.wayyBill?.baslik?.cariVergiDairesi} ${state.wayyBill?.baslik?.cariVKN}',
               ),
-              const SizedBox(height: WidgetSizes.spacingM),
-              const SizedBox(height: WidgetSizes.spacingM),
+              const SizedBox(height: WidgetSizes.spacingXxl2),
               const CustomText(text: 'Teslimat adresi: Migros Ataşehir'),
               const SizedBox(height: WidgetSizes.spacingXl),
               const CustomText(text: 'İrsaliye No: 23323123'),
@@ -88,6 +75,25 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
             ],
           );
         },
+      ),
+    );
+  }
+
+  WayybillLoading _floatinButtons(BuildContext context) {
+    return WayybillLoading(
+      parentChild: Scaffold(
+        floatingActionButton: PrintWayybillFloatingButton(
+          onPressed: () async {
+            await viewModel.printWaybill(context);
+          },
+          onPressedBluetooth: () async =>
+              viewModel.tryToBluetoothConnect(context, isManuel: true),
+        ),
+        appBar: WayyBillAppbar(
+          title:
+              '${widget.order.sevkiyatYeri} - ${widget.order.siparisNumarasi}',
+        ),
+        body: _body(),
       ),
     );
   }
