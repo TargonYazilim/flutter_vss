@@ -31,7 +31,7 @@ final class ProjectStrings {
   static const String removeBarcodeScanSuccess = 'Barkod silindi';
   static const String printWaybill = 'İrsaliye Yazdır';
   static const String showWaybill = 'İrsaliyeyi göster';
-    static const String checkAndPrintWaybill = 'Kontrol et ve yazdır';
+  static const String checkAndPrintWaybill = 'Kontrol et ve yazdır';
   static const String barcodeLimit = 'Daha fazla barkod okutamazsınız';
   static const String somethingError = 'Bir hata oluştu';
   static const String deliveredBy = 'Teslim Eden';
@@ -51,4 +51,10 @@ final class ProjectStrings {
   static const String save = 'Kaydet';
   static const String noAddressDetail = 'Adres bilgisi yok!';
   static const String ordersCheckAppBarTitle = 'Sipariş özeti';
+  static const String noBluetoothDevices =
+      "Bluetooth cihazı bulunamadı. Lütfen önce telefonunuzdan bluetooth ile printer'a bağlanınız";
+  static const String permissionError = "Lütfen gerekli izinleri veriniz.";
+  static const String bluetoothConnected ="Bluetooth bağlandı";
+  static const String bluetoothHasNoConnect = "Bluetooth bağlı değil";
+    static const String bluetoothConnectFailed = "Bluetooth bağlanamadı";
 }

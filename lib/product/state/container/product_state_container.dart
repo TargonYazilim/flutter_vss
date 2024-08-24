@@ -5,6 +5,12 @@ import 'package:flutter_vss/product/service/manager/order/synchronize_cache_mana
 import 'package:flutter_vss/product/service/manager/order/synchronize_cache_operation.dart';
 import 'package:flutter_vss/product/service/manager/product_service_manager.dart';
 import 'package:flutter_vss/product/state/view_model/product_view_model.dart';
+import 'package:flutter_vss/product/utility/bluetooth/bluetooth_printer_manager.dart';
+import 'package:flutter_vss/product/utility/bluetooth/bluetooth_printer_operation.dart';
+import 'package:flutter_vss/product/utility/bluetooth/interface/i_bluetooth_printer_manager.dart';
+import 'package:flutter_vss/product/utility/bluetooth/interface/i_bluetooth_printer_operation.dart';
+import 'package:flutter_vss/product/utility/permission_handler/interface/product_permission_operation.dart';
+import 'package:flutter_vss/product/utility/permission_handler/product_permission_handler.dart';
 import 'package:flutter_vss/product/utility/toast/toast_manager.dart';
 import 'package:flutter_vss/product/utility/toast/toast_service.dart';
 import 'package:get_it/get_it.dart';
@@ -19,7 +25,6 @@ final class ProductContainer {
   static void setup() {
     _getIt
       ..registerSingleton<SharedCacheOperation>(SharedCacheOperation())
-      ..registerLazySingleton<ToastManager>(ToastManager.new)
       ..registerLazySingleton<ToastService>(ToastManager.new)
       ..registerSingleton(ProductCache(cacheManager: HiveCacheManager()))
       ..registerSingleton<ProductNetworkManager>(ProductNetworkManager.base())
@@ -27,8 +32,14 @@ final class ProductContainer {
       ..registerLazySingleton<ISynchronizeCacheOperation>(
         SynchronizeCacheManager.new,
       )
-      ..registerLazySingleton<SynchronizeCacheManager>(
-        SynchronizeCacheManager.new,
+      ..registerLazySingleton<IBluetoothPrinterManager>(
+        BluetoothPrinterManager.new,
+      )
+      ..registerLazySingleton<ProductPermissionOperation>(
+        ProductPermissionHandler.new,
+      )
+      ..registerLazySingleton<IBluetoothPrinterOperation>(
+        BluetoothPrinterOperation.new,
       );
   }
 

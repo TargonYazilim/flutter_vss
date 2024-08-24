@@ -8,7 +8,6 @@ import 'package:flutter_vss/feature/order/home/view/order_view.dart';
 import 'package:flutter_vss/feature/order/wayybill/view/wayybill_view.dart';
 import 'package:flutter_vss/feature/settings/view/settings_view.dart';
 import 'package:flutter_vss/feature/splash/view/splash_view.dart';
-import 'package:flutter_vss/printer_page.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 
 part 'app_router.gr.dart';
@@ -23,7 +22,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: OrderRoute.page),
         AutoRoute(page: OrderDetailRoute.page),
         AutoRoute(page: WayyBillRoute.page),
-        AutoRoute(page: PrinterRoute.page),
         AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: CheckOrdersRoute.page),
       ];

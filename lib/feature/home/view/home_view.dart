@@ -6,6 +6,7 @@ import 'package:flutter_vss/product/navigation/app_router.dart';
 import 'package:flutter_vss/product/utility/constants/product_padding.dart';
 import 'package:flutter_vss/product/utility/constants/project_images.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
+import 'package:flutter_vss/product/utility/custom_keyboard_dismisser.dart';
 import 'package:flutter_vss/product/utility/size/widget_size.dart';
 import 'package:kartal/kartal.dart';
 
@@ -24,16 +25,16 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const HomeDrawerMenu(),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () => context.router.push(const PrinterRoute())),
-      resizeToAvoidBottomInset: false,
-      appBar: const HomeAppbar(),
-      body: Padding(
-        padding: const ProjectPadding.horizontalMedium(),
-        child: _body(context),
-        //child: _body(context),
+    return CustomKeyboardDismisser(
+      child: Scaffold(
+        drawer: const HomeDrawerMenu(),
+        resizeToAvoidBottomInset: false,
+        appBar: const HomeAppbar(),
+        body: Padding(
+          padding: const ProjectPadding.horizontalMedium(),
+          child: _body(context),
+          //child: _body(context),
+        ),
       ),
     );
   }
