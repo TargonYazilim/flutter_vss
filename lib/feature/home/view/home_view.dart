@@ -29,7 +29,7 @@ class _HomeViewState extends HomeViewModel {
       child: Scaffold(
         drawer: const HomeDrawerMenu(),
         resizeToAvoidBottomInset: false,
-        appBar: const HomeAppbar(),
+        appBar: HomeAppbar(fullName: fullName ?? '-'),
         body: Padding(
           padding: const ProjectPadding.horizontalMedium(),
           child: _body(context),

@@ -14,6 +14,7 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
     this.result,
     this.token,
     this.addressInfo,
+    this.userInfo,
   });
 
   LoginResponse.empty();
@@ -25,6 +26,7 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
   String? result;
   String? token;
   String? addressInfo;
+  String? userInfo;
 
   @override
   LoginResponse fromJson(Map<String, dynamic> json) =>
@@ -34,7 +36,7 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 
   @override
-  List<Object?> get props => [error, result, token, addressInfo, id];
+  List<Object?> get props => [error, result, token, addressInfo, userInfo, id];
 
   LoginResponse copyWith({
     int? id,
@@ -42,13 +44,14 @@ class LoginResponse extends IDioNexusNetworkModel<LoginResponse>
     String? result,
     String? token,
     String? addressInfo,
+    String? userInfo,
   }) {
     return LoginResponse(
       id: id ?? this.id,
       error: error ?? this.error,
       result: result ?? this.result,
       token: token ?? this.token,
-      addressInfo: addressInfo ?? this.addressInfo,
+      userInfo: userInfo ?? this.userInfo,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_vss/product/cache/core/cache_model.dart';
-import 'package:flutter_vss/product/cache/hive/hive_adater_id.dart';
+import 'package:flutter_vss/product/cache/hive/hive_adapter_id.dart';
 import 'package:hive/hive.dart';
 
 /// Hive register adapters manager

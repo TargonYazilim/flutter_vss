@@ -3,8 +3,11 @@
 part of '../home_view.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppbar({super.key});
-
+  const HomeAppbar({
+    required this.fullName,
+    super.key,
+  });
+  final String fullName;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -13,7 +16,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
       /*leading: Padding(
         padding: ProjectPadding.allSmall(),
         child: ProfilePicView(
-          imageProvider: ProjectImages.imgSafa.toImageProvider(),
+          imageProvider: ProjectImages.profileImage.toImageProvider(),
         ),
       ),*/
       title: Text(ProjectStrings.vss,
@@ -24,10 +27,11 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const ProjectPadding.allSmall(),
           child: Text(
-            'Safa Uludoğan',
+            fullName,
             style: context.general.appTheme.textTheme.titleMedium?.copyWith(
-                color: context.general.colorScheme.onSurface,
-                fontWeight: FontWeight.w500),
+              color: context.general.colorScheme.onSurface,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         )
       ],

@@ -22,7 +22,7 @@ class InputDialog extends StatefulWidget {
 
   /// Show the dialog for question
   /// This will always return [QuestionAnswer]
-  static Future<QuestionAnswer?>  show({
+  static Future<QuestionAnswer?> show({
     required BuildContext context,
     required String title,
   }) async {
@@ -49,7 +49,7 @@ class _InputDialogState extends State<InputDialog> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(false);
+            Navigator.of(context).pop();
           },
           child: Text(
             ProjectStrings.cancel,
@@ -64,8 +64,7 @@ class _InputDialogState extends State<InputDialog> {
           ),
           onPressed: () {
             if (_response.isEmpty) {
-              //TODO: null check
-              Navigator.of(context).pop(null);
+              Navigator.of(context).pop();
             } else {
               Navigator.of(context).pop(QuestionAnswer(response: _response));
             }
