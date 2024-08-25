@@ -4,12 +4,14 @@ class BaseUrlCompanyNoTextColumn extends StatelessWidget {
   const BaseUrlCompanyNoTextColumn({
     required this.baseUrlController,
     required this.companyNoController,
+    required this.periodNoController,
     required this.valueListenable,
     super.key,
   });
 
   final TextEditingController baseUrlController;
   final TextEditingController companyNoController;
+  final TextEditingController periodNoController;
   final ValueListenable<bool> valueListenable;
 
   @override
@@ -32,6 +34,14 @@ class BaseUrlCompanyNoTextColumn extends StatelessWidget {
               validator: (value) => ValidatorItems(value).validateCompanyNo,
               maxLength: ProjectValues.companyNoMaxLength,
               labelText: ProjectStrings.companyNoHint,
+              enabled: value,
+            ),
+            const SizedBox(height: WidgetSizes.spacingS),
+            ProductTextfield(
+              controller: periodNoController,
+              validator: (value) => ValidatorItems(value).validatePeriodNo,
+              maxLength: ProjectValues.periodNoMaxLength,
+              labelText: ProjectStrings.periodNoHint,
               enabled: value,
             ),
           ],

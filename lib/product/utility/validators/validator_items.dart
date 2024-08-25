@@ -31,4 +31,10 @@ class ValidatorItems {
         ? null
         : ProjectStrings.companyNoEmptyError;
   }
+
+  String? get validatePeriodNo {
+    return text.ext.isNotNullOrNoEmpty
+        ? null
+        : ProjectStrings.periodNoEmptyError;
+  }
 }

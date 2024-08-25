@@ -1,44 +1,33 @@
 // ignore_for_file: public_member_api_docs
 
-part of '../settings_view.dart';
+part of '../shipment_view.dart';
 
-class SettingsAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const SettingsAppbar({
-    required this.valueListenable,
-    super.key,
-  });
-
-  final ValueListenable<bool> valueListenable;
+class ShipmentAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const ShipmentAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 1,
       shadowColor: context.general.appTheme.colorScheme.shadow,
-      /*leading: Padding(
-        padding: ProjectPadding.allSmall(),
-        child: ProfilePicView(
-          imageProvider: ProjectImages.profileImage.toImageProvider(),
-        ),
-      ),*/
       title: Text(
-        ProjectStrings.settings,
+        ProjectStrings.orders,
         style: context.general.appTheme.textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.bold,
           color: context.general.appTheme.colorScheme.onSurface,
         ),
       ),
+      actions: [LoadingBlocBuilder()],
       centerTitle: true,
-      //backgroundColor: context.general.appTheme.colorScheme.primary,
-      actions: [
-        Loading(),
-      ],
     );
   }
 
-  Widget Loading() {
-    return ValueListenableBuilder<bool>(
-      builder: (context, value, child) {
+  Widget LoadingBlocBuilder() {
+    return BlocBuilder<OrderViewModel, OrderState>(
+      builder: (BuildContext context, state) {
+        if (!state.isLoading) {
+          return const SizedBox.shrink();
+        }
         return const Padding(
           padding: ProjectPadding.rightSmall(),
           child: SizedBox(
@@ -46,9 +35,8 @@ class SettingsAppbar extends StatelessWidget implements PreferredSizeWidget {
             width: WidgetSizes.spacingXl,
             child: CircularProgressIndicator(),
           ),
-        ).ext.toVisible(value: value);
+        );
       },
-      valueListenable: valueListenable,
     );
   }
 

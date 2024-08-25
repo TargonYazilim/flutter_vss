@@ -22,8 +22,13 @@ final class LoginViewModel extends Cubit<LoginState> {
         _sharedCacheOperation = sharedCacheOperation,
         super(const LoginState(isLoading: false));
 
+  /// Auth service operations
   final AuthenticationOperation _authenticationOperation;
+
+  // Login caches from hive
   final HiveCacheOperation<LoginResponse> _loginResponseCacheOperation;
+
+  /// Shared caches
   final SharedCacheOperation _sharedCacheOperation;
 
   final GlobalKey<FormState> loginFormKey = GlobalKey();
@@ -42,13 +47,17 @@ final class LoginViewModel extends Cubit<LoginState> {
           username: usernameController.text,
           password: passwordController.text,
           macaddress: deviceUniqueId,
+          companyNo: companyNo,
+          periodNo: periodNo,
         ),
       );
 
-      if (result?.model?.error == '1') {
-        _showError(result?.model?.result);
-      } else if (result?.errorModel != null) {
+    ;
+      if (result?.errorModel != null) {
         _showError(result?.errorModel?.errorMessage);
+      } else if (result?.model?.error != '0' &&
+          result?.model?.error?.trim() != '') {
+        _showError(result?.model?.result);
       } else {
         await _saveUserId(result?.model?.id.toString());
         return _saveItems(result?.model);
@@ -75,4 +84,10 @@ final class LoginViewModel extends Cubit<LoginState> {
     if (message == null) return;
     ProductStateItems.toastService.showErrorMessage(message: message);
   }
+
+  /// Get companyNo from shared cache for login
+  String? get companyNo => _sharedCacheOperation.get(SharedKeys.companyNo);
+
+  /// Get periodNo from shared cache for login
+  String? get periodNo => _sharedCacheOperation.get(SharedKeys.periodNo);
 }
