@@ -9,6 +9,7 @@ abstract class SettingsViewModel extends State<SettingsView> {
 
   late final TextEditingController baseUrlController;
   late final TextEditingController companyNoController;
+  late final TextEditingController periodNoController;
 
   late final SharedCacheOperation _sharedCacheOperation;
 
@@ -23,6 +24,7 @@ abstract class SettingsViewModel extends State<SettingsView> {
 
     baseUrlController = TextEditingController(text: baseUrl);
     companyNoController = TextEditingController(text: companyNo);
+    periodNoController = TextEditingController(text: periodNo);
 
     isSettingsEditable.value = userId?.isEmpty ?? true;
   }
@@ -33,6 +35,7 @@ abstract class SettingsViewModel extends State<SettingsView> {
 
     baseUrlController.dispose();
     companyNoController.dispose();
+    periodNoController.dispose();
   }
 
   /// Save base url and company no to cache
@@ -45,6 +48,10 @@ abstract class SettingsViewModel extends State<SettingsView> {
       SharedKeys.companyNo,
       companyNoController.text,
     );
+    await _sharedCacheOperation.add(
+      SharedKeys.periodNo,
+      periodNoController.text,
+    );
     changeLoading();
     if (!context.mounted) return;
     Navigator.of(context).pop(true);
@@ -55,6 +62,9 @@ abstract class SettingsViewModel extends State<SettingsView> {
 
   /// Get company no from cache
   String? get companyNo => _sharedCacheOperation.get(SharedKeys.companyNo);
+
+  /// Get period no from cache
+  String? get periodNo => _sharedCacheOperation.get(SharedKeys.periodNo);
 
   /// Get company no from cache
   String? get userId => _sharedCacheOperation.get(SharedKeys.userId);

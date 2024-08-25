@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 /// Manager your network error with screen
+
+//TODO: check this class
 final class ProductNetworkErrorManager {
   ProductNetworkErrorManager(this.context);
 

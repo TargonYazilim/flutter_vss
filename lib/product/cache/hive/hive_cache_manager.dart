@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vss/product/cache/core/cache_manager.dart';
 import 'package:flutter_vss/product/cache/core/cache_register.dart';
-import 'package:flutter_vss/product/cache/hive/hive_adater_id.dart';
+import 'package:flutter_vss/product/cache/hive/hive_adapter_id.dart';
 import 'package:flutter_vss/product/service/model/barcode/barcode.dart';
 import 'package:flutter_vss/product/service/model/login/login_response.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';

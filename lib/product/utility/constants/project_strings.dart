@@ -46,8 +46,10 @@ final class ProjectStrings {
   static const String addBarcode = 'Barkod giriniz';
   static const String baseUrlHint = 'Sunucu Adresi (IP)';
   static const String companyNoHint = 'Firma numarası';
+  static const String periodNoHint = 'Periyod numarası';
   static const String baseUrlEmptyError = 'Sunucu Adresi (IP) giriniz';
   static const String companyNoEmptyError = 'Firma numarası giriniz';
+  static const String periodNoEmptyError = 'Periyod numarası giriniz';
   static const String save = 'Kaydet';
   static const String noAddressDetail = 'Adres bilgisi yok!';
   static const String ordersCheckAppBarTitle = 'Sipariş özeti';

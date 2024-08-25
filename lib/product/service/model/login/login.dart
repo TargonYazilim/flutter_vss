@@ -10,12 +10,16 @@ class Login extends IDioNexusNetworkModel<Login> with EquatableMixin {
     this.username,
     this.password,
     this.macaddress,
+    this.companyNo,
+    this.periodNo,
   });
 
   factory Login.fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
   String? username;
   String? password;
   String? macaddress;
+  String? companyNo;
+  String? periodNo;
 
   @override
   Login fromJson(Map<String, dynamic> json) => Login.fromJson(json);
@@ -24,17 +28,22 @@ class Login extends IDioNexusNetworkModel<Login> with EquatableMixin {
   Map<String, dynamic> toJson() => _$LoginToJson(this);
 
   @override
-  List<Object?> get props => [username, password, macaddress];
+  List<Object?> get props =>
+      [username, password, macaddress, companyNo, periodNo];
 
   Login copyWith({
     String? username,
     String? password,
     String? macaddress,
+    String? companyNo,
+    String? periodNo,
   }) {
     return Login(
       username: username ?? this.username,
       password: password ?? this.password,
       macaddress: macaddress ?? this.macaddress,
+      companyNo: companyNo ?? this.companyNo,
+      periodNo: periodNo ?? this.periodNo,
     );
   }
 }

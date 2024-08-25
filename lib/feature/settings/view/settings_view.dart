@@ -52,6 +52,7 @@ class _SettingsViewState extends SettingsViewModel {
             baseUrlController: baseUrlController,
             companyNoController: companyNoController,
             valueListenable: isSettingsEditable,
+            periodNoController: periodNoController,
           ),
         ],
       ),

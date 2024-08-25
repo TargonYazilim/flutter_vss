@@ -1,1 +1,1 @@
-enum SharedKeys { userId, baseUrl, companyNo,bluetoothDevice }
+enum SharedKeys { userId, baseUrl, companyNo,periodNo,bluetoothDevice }
