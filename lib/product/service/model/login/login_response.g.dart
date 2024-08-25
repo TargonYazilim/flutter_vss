@@ -13,6 +13,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
       result: json['result'] as String?,
       token: json['token'] as String?,
       addressInfo: json['addressInfo'] as String?,
+      userInfo: json['userInfo'] as String?,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'result': instance.result,
       'token': instance.token,
       'addressInfo': instance.addressInfo,
+      'userInfo': instance.userInfo,
     };
