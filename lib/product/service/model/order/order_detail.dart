@@ -82,7 +82,11 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
 
   @override
   String get summaryTitle {
-    _totalPrice = 0;
+    return '$title - ${scans?.length ?? 0} $birim - $totalScanAmount KG';
+  }
+
+  String? get totalScanAmount {
+    _totalPrice = 0.0;
     if (scans?.isNotEmpty ?? false) {
       for (final scan in scans!) {
         if (scan.result != null) {
@@ -92,7 +96,8 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
           _totalPrice = _totalPrice + price;
         }
       }
+      return _totalPrice.toString();
     }
-    return '$title - ${scans?.length ?? 0} $birim - $_totalPrice KG';
+    return '';
   }
 }

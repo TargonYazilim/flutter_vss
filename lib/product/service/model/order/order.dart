@@ -95,7 +95,7 @@ class Order extends IDioNexusNetworkModel<Order>
 
   @override
   List<Scan> get subList => [];
-  
+
   @override
   String? get subTitle => null;
 }

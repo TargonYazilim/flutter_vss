@@ -6,7 +6,7 @@ import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 final class CustomBarcodeScanner {
   Future<BarcodeScannerResponse> scan(ScanMode scanMode) async {
     if (scanMode == ScanMode.BARCODE) {
-      return await _scanBarcode();
+      return _scanBarcode();
     } else {
       throw Exception('QR Scanner does not initialize');
     }
@@ -17,10 +17,16 @@ final class CustomBarcodeScanner {
 
     try {
       barcodeScanRes = barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', ProjectStrings.cancel, true, ScanMode.BARCODE);
+        '#ff6666',
+        ProjectStrings.cancel,
+        true,
+        ScanMode.BARCODE,
+      );
 
       return BarcodeScannerResponse(
-          scanResult: barcodeScanRes, errorMessage: null);
+        scanResult: barcodeScanRes,
+        errorMessage: null,
+      );
     } on PlatformException {
       return BarcodeScannerResponse(
           scanResult: null, errorMessage: 'Platform sürümü alınamadı.');
