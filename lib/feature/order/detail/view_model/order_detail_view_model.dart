@@ -47,7 +47,9 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   Future<void> scanBarcodeManuel(BuildContext context, int index) async {
     if (!context.mounted) return;
     final result = await InputDialog.show(
-        context: context, title: ProjectStrings.addBarcode);
+      context: context,
+      title: ProjectStrings.addBarcode,
+    );
     if (result != null) {
       await _barcodeControl(result.response, index);
     }

@@ -59,4 +59,5 @@ final class ProjectStrings {
   static const String bluetoothConnected ="Bluetooth bağlandı";
   static const String bluetoothHasNoConnect = "Bluetooth bağlı değil";
     static const String bluetoothConnectFailed = "Bluetooth bağlanamadı";
+    static const String addressNotFound = "Adres bilgisi mevcut değil!";
 }

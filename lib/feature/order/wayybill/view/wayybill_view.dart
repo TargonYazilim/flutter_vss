@@ -87,7 +87,7 @@ class _WayyBillViewState extends WayybillBaseState<WayyBillView>
             await viewModel.printWaybill(context);
           },
           onPressedBluetooth: () async =>
-              viewModel.tryToBluetoothConnect(context, isManuel: true),
+              viewModel.tryToBluetoothConnection(context, isManuel: true),
         ),
         appBar: WayyBillAppbar(
           title:
