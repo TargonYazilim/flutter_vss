@@ -10,6 +10,7 @@ import 'package:flutter_vss/product/service/model/login/login_response.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 import 'package:flutter_vss/product/state/base/base_cubit.dart';
 import 'package:flutter_vss/product/state/container/product_state_items.dart';
+import 'package:flutter_vss/product/utility/bluetooth/enum/printer_enum.dart';
 import 'package:flutter_vss/product/utility/bluetooth/interface/i_bluetooth_printer_operation.dart';
 import 'package:flutter_vss/product/utility/constants/project_strings.dart';
 import 'package:flutter_vss/product/widget/bottom_sheet/bluetooth_bottom_sheet/view/bluetooth_bottom_sheet.dart';
@@ -48,8 +49,15 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
   final WayyBillOperation _wayyBillOperation;
   Order _order;
 
-  Future<bool> tryToBluetoothConnect(BuildContext context,
-      {bool isManuel = false}) async {
+  Future<bool> tryToBluetoothConnection(
+    BuildContext context, {
+    bool isManuel = false,
+  }) async {
+    /// Get selected device from shared cache
+    var device = getBluetoothDevice();
+
+    await _connectToBluetooth(device);
+
     if (await _bluetoothOperation.isConnected() && !isManuel) {
       ProductStateItems.toastService
           .showSuccessMessage(message: ProjectStrings.bluetoothConnected);
@@ -57,14 +65,10 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
     } else {
       if (!context.mounted) return false;
 
-      /// Get selected device from shared cache
-      var device = getBluetoothDevice();
-
       /// Connect with manuel
       final manuelSelect = await BluetoothBottomSheet.show(context: context);
       if (manuelSelect != null) device = manuelSelect;
-      final response = await _bluetoothOperation.connect(device);
-      if (response) {
+      if (await _connectToBluetooth(device)) {
         await saveBluetoothDevice(device);
         ProductStateItems.toastService
             .showSuccessMessage(message: ProjectStrings.bluetoothConnected);
@@ -76,13 +80,76 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
     return false;
   }
 
+  Future<bool> _connectToBluetooth(BluetoothDevice? device) async {
+    if (device == null) return false;
+    return _bluetoothOperation.connect(device);
+  }
+
   Future<void> printWaybill(BuildContext context) async {
     try {
       changeLoading();
 
-      final result = await tryToBluetoothConnect(context);
+      final result = await tryToBluetoothConnection(context);
       if (result) {
         //await saveOrdersToService();
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printQRcode(
+          textToQR: 'Deneme çıktısı',
+          width: 150,
+          height: 150,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printCustom(
+          message: state.addressInfo!,
+          size: PrinterSize.boldMedium,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printCustom(
+          message:
+              '${state.wayyBill?.baslik?.cariUnvan}\n${state.wayyBill?.baslik?.cariAdresi}',
+          size: PrinterSize.boldMedium,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printCustom(
+          message: 'Teslimat adresi: Migros Ataşehir',
+          size: PrinterSize.boldMedium,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printCustom(
+          message: 'İrsaliye No: 23323123',
+          size: PrinterSize.boldMedium,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printCustom(
+          message: 'Tarih saat: ${DateTime.now().toString()}',
+          size: PrinterSize.boldMedium,
+          align: PrinterAlign.left,
+        );
+        await _bluetoothOperation.printNewLine();
+        if (_order.orderDetails != null && _order.orderDetails!.isNotEmpty) {
+          for (final orderDetail in _order.orderDetails!) {
+            await _bluetoothOperation.printCustom(
+              message: '${orderDetail.malzemeAdi}\n'
+                  '${orderDetail.scans?.length ?? 0} ${orderDetail.birim}     '
+                  '${orderDetail.totalScanAmount} '
+                  '${orderDetail.totalScanAmount != '' ? 'KG' : ''}',
+              size: PrinterSize.boldMedium,
+              align: PrinterAlign.left,
+            );
+          }
+        }
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printLeftRight(
+          leftMessage: ProjectStrings.deliveredBy,
+          rightMessage: ProjectStrings.recipient,
+          size: PrinterSize.bold,
+        );
+        await _bluetoothOperation.printNewLine();
+        await _bluetoothOperation.printNewLine();
       }
     } finally {
       changeLoading();
@@ -147,6 +214,7 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
 
   Future<void> saveBluetoothDevice(BluetoothDevice? device) async {
     if (device == null) return;
+    const myDevice = '3d printer|12:BB:A3:22';
     final deviceInfo = '${device.name}|${device.address}';
     await _sharedCacheOperation.add(SharedKeys.bluetoothDevice, deviceInfo);
   }
