@@ -1,3 +1,5 @@
 1. İrsaliye bilgileri veya ürün okutma bilgileri local'de tutulacak. Senkronize edildiğinde sunucuya gönderilecek.
 2. Splashscreen sayfasında eğer henüz senkronize edilmemiş orderlar varsa önce onları senkronize et daha sonra verileri db den çek. Yoksa veriler kayboluyor 
 3. Order detail sayfasında scan yapıldıktan sonra veriyi db'ye atmayı dene. Daha sonra ordan başarılı sonuç alınırsa localde synronize verisini true olarak yap.
+4. Ekranda gösterilecek olan siparişler günün siparişleri olmalı. Eğer bu siparişin günü geçtiyse cache'den sil. Aynı zamanda
+cache'den silinmemesi için status'u 1 yaparak sunucudan silinmesini engelle. Çünkü senkronizasyon esnasında sunucudaki veriler silinir.

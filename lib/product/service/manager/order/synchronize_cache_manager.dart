@@ -48,8 +48,16 @@ final class SynchronizeCacheManager extends ISynchronizeCacheOperation {
       final result = await _orderOperation.getOrder(int.parse(userId!));
 
       /// Cache'den siparişleri al
-      final ordersFromCache = _orderCacheOperation.getAll();
+      var ordersFromCache = _orderCacheOperation.getAll();
 
+      /// Delete old order caches
+      final deleted =
+          _clearAllOldCacheOrders(result?.model?.date, ordersFromCache);
+      if (deleted) {
+        /// Get orders from cache, if any order deleted from cache
+        /// because of [ordersFromCache] have to refresh
+        ordersFromCache = _orderCacheOperation.getAll();
+      }
       final orders = result?.model?.orders ?? [];
 
       if (orders.isNotEmpty) {
@@ -96,6 +104,27 @@ final class SynchronizeCacheManager extends ISynchronizeCacheOperation {
       }
       _saveOrdersToCache(orders);
     }
+  }
+
+  bool _clearAllOldCacheOrders(
+    DateTime? dateFromServer,
+    List<Order> ordersFromCache,
+  ) {
+    var anyDataDeleted = false;
+    if (ordersFromCache.isEmpty || dateFromServer == null) return false;
+    for (final order in ordersFromCache) {
+      final cacheDate = DateTime.parse(order.siparisTarihi!);
+      final serverDate = dateFromServer.toLocal();
+      if (cacheDate.year != serverDate.year ||
+          cacheDate.month != serverDate.month ||
+          cacheDate.day != serverDate.day) {
+        /// Clear order from cache, if date not equals today
+        _orderCacheOperation.remove(order.cacheId);
+        anyDataDeleted = true;
+      }
+    }
+
+    return anyDataDeleted;
   }
 
   @override

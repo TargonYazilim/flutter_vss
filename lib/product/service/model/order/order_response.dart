@@ -7,15 +7,17 @@ part 'order_response.g.dart';
 @JsonSerializable()
 class OrderResponse extends IDioNexusNetworkModel<OrderResponse>
     with EquatableMixin {
-  int? errorCode;
-  String? result;
-  List<Order>? orders;
-
   OrderResponse({
     this.errorCode,
     this.result,
     this.orders,
+    this.date,
   });
+
+  int? errorCode;
+  String? result;
+  DateTime? date;
+  List<Order>? orders;
 
   @override
   OrderResponse fromJson(Map<String, dynamic> json) =>
@@ -28,17 +30,19 @@ class OrderResponse extends IDioNexusNetworkModel<OrderResponse>
   Map<String, dynamic> toJson() => _$OrderResponseToJson(this);
 
   @override
-  List<Object?> get props => [errorCode, result, orders];
+  List<Object?> get props => [errorCode, result, orders, date];
 
   OrderResponse copyWith({
     int? errorCode,
     String? result,
+    DateTime? date,
     List<Order>? orders,
   }) {
     return OrderResponse(
       errorCode: errorCode ?? this.errorCode,
       result: result ?? this.result,
       orders: orders ?? this.orders,
+      date: date ?? this.date,
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_vss/feature/order/detail/view/order_detail_view.dart';
 import 'package:flutter_vss/feature/order/home/view/order_view.dart';
 import 'package:flutter_vss/feature/order/wayybill/view/wayybill_view.dart';
 import 'package:flutter_vss/feature/settings/view/settings_view.dart';
+import 'package:flutter_vss/feature/shipment/home/view/shipment_view.dart';
 import 'package:flutter_vss/feature/splash/view/splash_view.dart';
 import 'package:flutter_vss/product/service/model/order/order.dart';
 
