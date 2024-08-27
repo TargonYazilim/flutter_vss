@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_vss/feature/order/detail/view_model/state/order_detail_state.dart';
 import 'package:flutter_vss/product/cache/hive/hive_cache_operation.dart';
 import 'package:flutter_vss/product/navigation/app_router.dart';
@@ -41,7 +42,8 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   late Order _order;
 
   Future<void> scanBarcode(int index) async {
-    await _barcodeControl('2822404', index);
+    final result = await _barcodeScanner.scan(ScanMode.BARCODE);
+    await _barcodeControl(result.scanResult, index);
   }
 
   Future<void> scanBarcodeManuel(BuildContext context, int index) async {
@@ -55,19 +57,10 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
     }
   }
 
-  Future<void> _barcodeControl(String barcode, int index) async {
-    final bar = Barcode(
-      barkod: barcode,
-      kilo: '210 kg',
-      birim: 'ADET',
-      malzemeKodu: 'T103',
-    );
-    await updateBarcodeList(index, bar.kilo);
-
-    /*final result = await _barcodeScanner.scan(ScanMode.BARCODE);
-    if (result.scanResult != null) {
-      final barcode = _barcodeCacheOperation.get('2822404');
-      if (barcode == null) {
+  Future<void> _barcodeControl(String? barcode, int index) async {
+    if (barcode != null) {
+      final barcodeResponse = _barcodeCacheOperation.get(barcode);
+      if (barcodeResponse == null) {
         ProductStateItems.toastService
             .showErrorMessage(message: ProjectStrings.barcodeNotFound);
       } else {
@@ -77,19 +70,13 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
         } else {*/
         ProductStateItems.toastService
             .showSuccessMessage(message: ProjectStrings.barcodeMatched);
-        await updateBarcodeList(index, barcode.kilo);
-
-        // final response = await _orderOperation.scanOrderBarcode(
-        //   '2822404',
-        //   _order.siparisNumarasi ?? '',
-        //   state.orderDetails?[index].malzemeKodu ?? '',
-        // );
-        //}
+        await updateBarcodeList(index, barcodeResponse.kilo);
+        //]
       }
     } else {
       ProductStateItems.toastService
           .showInfoMessage(message: ProjectStrings.scanBarcodeFailed);
-    }*/
+    }
   }
 
   Future<void> updateBarcodeList(int index, String? scanResult) async {
@@ -188,7 +175,7 @@ class OrderDetailViewModel extends BaseCubit<OrderDetailState> {
   /// Get Orders from cache
   void getAllOrderDetailsFromCache() {
     final result = _orderCacheOperation.get(_order.cacheId);
-
+    print(result?.siparisTarihi);
     emit(state.copyWith(orderDetails: result?.orderDetails));
     emit(state.copyWith(showButton: _anyScans()));
   }
