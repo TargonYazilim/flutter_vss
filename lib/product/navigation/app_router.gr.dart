@@ -59,6 +59,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SettingsView(),
       );
     },
+    ShipmentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ShipmentView(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -206,6 +212,20 @@ class SettingsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ShipmentView]
+class ShipmentRoute extends PageRouteInfo<void> {
+  const ShipmentRoute({List<PageRouteInfo>? children})
+      : super(
+          ShipmentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ShipmentRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
