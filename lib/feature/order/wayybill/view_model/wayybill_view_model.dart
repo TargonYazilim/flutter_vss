@@ -194,7 +194,7 @@ class WayybillViewModel extends BaseCubit<WayybillState> {
 
   /// Show error when fetch data from db is error exists
   void _showError(String? message) {
-    if (message == null) return;
+    if (message == null || message.trim() == '') return;
     ProductStateItems.toastService.showErrorMessage(message: message);
   }
 
