@@ -82,7 +82,7 @@ class OrderDetail extends IDioNexusNetworkModel<OrderDetail>
 
   @override
   String get summaryTitle {
-    return '$title - ${scans?.length ?? 0} $birim - $totalScanAmount KG';
+    return '$title\n${scans?.length ?? 0} $birim - $totalScanAmount KG';
   }
 
   String? get totalScanAmount {
